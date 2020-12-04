@@ -58,4 +58,49 @@ class Admin extends CI_Controller {
                 $this->m_master->delete_data($where,'tb_anggota');
                 redirect('admin/anggota?pesan=hapusberhasil');
         }
+
+        public function edit_anggota($id){
+                $data['judul'] = 'Data Buku';
+                $where = array(
+                        'id' => $id
+                );
+                $data['anggota'] = $this->m_master->edit_data($where,'tb_anggota')->result();
+
+                $this->load->view('template/header',$data);
+                $this->load->view('template/sidebar');
+                $this->load->view('anggota/v_editanggota',$data);
+                $this->load->view('template/footer');
+        }
+
+        public function update_anggota(){
+                $id = $this->input->post('id');
+                $nim = $this->input->post('nim');
+                $nama = $this->input->post('nama');
+                $jk = $this->input->post('jk');
+                $alamat = $this->input->post('alamat');
+
+                $data = array(
+                        'nim'    => $nim,
+                        'nama'   => $nama,
+                        'jk'     => $jk,
+                        'alamat' => $alamat
+                );
+
+                $where = array(
+                        'id'    => $id
+                );
+
+                $this->form_validation->set_rules('nim','Nim','trim|required');
+                $this->form_validation->set_rules('nama','Nama','trim|required');
+                $this->form_validation->set_rules('jk','JK','trim|required');
+                $this->form_validation->set_rules('alamat','Alamat','trim|required');
+
+                if($this->form_validation->run() != false){
+                        $this->m_master->update_data($where,$data,'tb_anggota');
+                        redirect('admin/anggota/update');
+                }
+                else{
+                        redirect('admin/edit_anggota/'$id'?pesan=gagal');
+                }
+        }
 }
