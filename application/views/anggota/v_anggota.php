@@ -21,6 +21,9 @@
                         if($_GET['pesan'] == "update"){
                             echo "<div class='alert alert-success'>Berhasil Mengupdate Data</div>";
                         }
+                        if($_GET['pesan'] == "gagalupdate"){
+                            echo "<div class='alert alert-danger'>Gagal Update Data | isi semua kolom !!</div>";
+                        }
                     }
                 ?>
 
@@ -52,9 +55,9 @@
                             <td><?php echo $ang->jk ?></td>
                             <td><?php echo $ang->alamat ?></td>
                             <td>
-                                <?php echo anchor('admin/edit_anggota/'.$ang->id,'<div class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Data"><i class="fas fa-edit"></i></div>')?>
+                                <?php echo anchor('admin/edit_anggota/'.$ang->nim,'<div class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Data"><i class="fas fa-edit"></i></div>')?>
                                 <a href="" class="btn btn-sm btn-warning"><i class="fas fa-print" data-placement="top" title="Print Kartu Anggota"></i></a>
-                                <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i class="fas fa-trash" data-placement="top" title="Hapus Data" onclick="hapusdata(<?php echo $ang->id;?>)";></i></a>
+                                <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i class="fas fa-trash" data-placement="top" title="Hapus Data" onclick="hapusdata(<?php echo $ang->nim;?>)";></i></a>
                             </td>
                         </tr>
                         <?php } ?>

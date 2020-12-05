@@ -53,16 +53,16 @@ class Admin extends CI_Controller {
 
         public function hapus_anggota($id){
                 $where = array(
-                        'id' => $id
+                        'nim' => $nim
                 );
                 $this->m_master->delete_data($where,'tb_anggota');
                 redirect('admin/anggota?pesan=hapusberhasil');
         }
 
-        public function edit_anggota($id){
+        public function edit_anggota($nim){
                 $data['judul'] = 'Data Buku';
                 $where = array(
-                        'id' => $id
+                        'nim' => $nim
                 );
                 $data['anggota'] = $this->m_master->edit_data($where,'tb_anggota')->result();
 
@@ -73,21 +73,19 @@ class Admin extends CI_Controller {
         }
 
         public function update_anggota(){
-                $id = $this->input->post('id');
                 $nim = $this->input->post('nim');
                 $nama = $this->input->post('nama');
                 $jk = $this->input->post('jk');
                 $alamat = $this->input->post('alamat');
 
                 $data = array(
-                        'nim'    => $nim,
                         'nama'   => $nama,
                         'jk'     => $jk,
                         'alamat' => $alamat
                 );
 
                 $where = array(
-                        'id'    => $id
+                        'nim'    => $nim
                 );
 
                 $this->form_validation->set_rules('nim','Nim','trim|required');
@@ -97,10 +95,52 @@ class Admin extends CI_Controller {
 
                 if($this->form_validation->run() != false){
                         $this->m_master->update_data($where,$data,'tb_anggota');
-                        redirect('admin/anggota/update');
+                        redirect('admin/anggota?pesan=update');
                 }
                 else{
-                        redirect('admin/edit_anggota/'$id'?pesan=gagal');
+                        redirect('admin/anggota?pesan=gagalupdate');
                 }
+        }
+
+        public function petugas(){
+                $data['judul'] = 'Data Petugas';
+                $data['petugas'] = $this->m_master->get_data('tb_petugas')->result();
+
+                $this->load->view('template/header',$data);
+                $this->load->view('template/sidebar');
+                $this->load->view('petugas/v_petugas',$data);
+                $this->load->view('template/footer');
+        }
+
+        public function input_petugas(){
+                $nama     = $this->input->post('nama');
+                $username = $this->input->post('username');
+                $password = $this->input->post('password');
+
+                $data = array(
+                        'nama'     => $nama,
+                        'username' => $username,
+                        'password' => md5($password)
+                );
+
+                $this->form_validation->set_rules('nama','Nama','trim|required');
+                $this->form_validation->set_rules('username','Username','trim|required');
+                $this->form_validation->set_rules('password','Password','trim|required');
+
+                if($this->form_validation->run() != false){
+                        $this->m_master->insert_data($data,'tb_petugas');
+                        redirect('admin/petugas?pesan=berhasil');
+                }
+                else{
+                        redirect('admin/petugas?pesan=gagal');
+                }
+        }
+
+        public function hapus_petugas($id){
+                $where = array(
+                        'id' => $id
+                );
+                $this->m_master->delete_data($where,'tb_petugas');
+                redirect('admin/petugas?pesan=hapus');
         }
 }
