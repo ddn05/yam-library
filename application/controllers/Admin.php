@@ -143,4 +143,107 @@ class Admin extends CI_Controller {
                 $this->m_master->delete_data($where,'tb_petugas');
                 redirect('admin/petugas?pesan=hapus');
         }
+
+        public function buku(){
+                $data['judul'] = 'Data Buku';
+                $data['buku'] = $this->m_master->get_data('tb_buku')->result();
+
+                $this->load->view('template/header',$data);
+                $this->load->view('template/sidebar');
+                $this->load->view('buku/v_buku',$data);
+                $this->load->view('template/footer');
+        }
+
+        public function input_buku(){
+                $kode           = $this->input->post('kode');
+                $judul          = $this->input->post('judul');
+                $penulis        = $this->input->post('penulis');
+                $tahun          = $this->input->post('tahun');
+                $penerbit       = $this->input->post('penerbit');
+                $kategori       = $this->input->post('kategori');
+
+                $data = array(
+                        'kode'          => $kode,
+                        'judul'         => $judul,
+                        'penulis'       => $penulis,
+                        'tahun'         => $tahun,
+                        'penerbit'      => $penerbit,
+                        'kategori'      => $kategori
+                );
+
+                $this->form_validation->set_rules('kode','Kode','trim|required');
+                $this->form_validation->set_rules('judul','Judul','trim|required');
+                $this->form_validation->set_rules('penulis','Penulis','trim|required');
+                $this->form_validation->set_rules('tahun','Tahun','trim|required');
+                $this->form_validation->set_rules('penerbit','Penerbit','trim|required');
+                $this->form_validation->set_rules('kategori','Kategori','trim|required');
+
+                if($this->form_validation->run() != false){
+                        $this->m_master->insert_data($data,'tb_buku');
+                        redirect('admin/buku?pesan=berhasil');
+                }
+                else{
+                        redirect('admin/buku?pesan=gagal');
+                }
+        }
+
+        public function hapus_buku($kode){
+                $where = array(
+                        'kode' => $kode
+                );
+
+                $this->m_master->delete_data($where,'tb_buku');
+                redirect('admin/buku?pesan=hapus');
+        }
+
+        public function edit_buku($kode){
+                $data['judul'] = 'Edit Buku';
+
+                $where = array(
+                        'kode' => $kode
+                );
+
+                $data['buku'] = $this->m_master->edit_data($where,'tb_buku')->result();
+
+                $this->load->view('template/header',$data);
+                $this->load->view('template/sidebar');
+                $this->load->view('buku/v_editbuku',$data);
+                $this->load->view('template/footer');
+        }
+
+        public function update_buku(){
+                $kode           = $this->input->post('kode');
+                $judul          = $this->input->post('judul');
+                $penulis        = $this->input->post('penulis');
+                $tahun          = $this->input->post('tahun');
+                $penerbit       = $this->input->post('penerbit');
+                $kategori       = $this->input->post('kategori');
+
+                $data = array(
+                        'judul'         => $judul,
+                        'penulis'       => $penulis,
+                        'tahun'         => $tahun,
+                        'penerbit'      => $penerbit,
+                        'kategori'      => $kategori
+                );
+
+                $where = array(
+                        'kode'          => $kode
+                );
+
+                $this->form_validation->set_rules('kode','Kode','trim|required');
+                $this->form_validation->set_rules('judul','Judul','trim|required');
+                $this->form_validation->set_rules('penulis','Penulis','trim|required');
+                $this->form_validation->set_rules('tahun','Tahun','trim|required');
+                $this->form_validation->set_rules('penerbit','Penerbit','trim|required');
+                $this->form_validation->set_rules('kategori','Kategori','trim|required');
+
+                if($this->form_validation->run() != false){
+                        $this->m_master->update_data($where,$data,'tb_buku');
+                        redirect('admin/buku?pesan=update');
+                }
+                else{
+                        redirect('admin/buku?pesan=gagalupdate');
+                }
+        }
 }
