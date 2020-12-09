@@ -21,11 +21,25 @@ USE `yam-library`;
 DROP TABLE IF EXISTS `tb_anggota`;
 
 CREATE TABLE `tb_anggota` (
-  `nim` varchar(12) NOT NULL,
+  `nim` int(12) NOT NULL,
   `nama` varchar(20) DEFAULT NULL,
   `jk` varchar(10) DEFAULT NULL,
   `alamat` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`nim`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+/*Table structure for table `tb_buku` */
+
+DROP TABLE IF EXISTS `tb_buku`;
+
+CREATE TABLE `tb_buku` (
+  `kode` varchar(10) NOT NULL,
+  `judul` varchar(40) DEFAULT NULL,
+  `penulis` varchar(40) DEFAULT NULL,
+  `tahun` int(4) DEFAULT NULL,
+  `penerbit` varchar(40) DEFAULT NULL,
+  `kategori` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`kode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 /*Table structure for table `tb_petugas` */
@@ -38,6 +52,30 @@ CREATE TABLE `tb_petugas` (
   `username` varchar(30) DEFAULT NULL,
   `password` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+/*Table structure for table `tb_transaksi` */
+
+DROP TABLE IF EXISTS `tb_transaksi`;
+
+CREATE TABLE `tb_transaksi` (
+  `id_transaksi` int(30) NOT NULL,
+  `id_petugas` int(30) DEFAULT NULL,
+  `nim_anggota` int(12) DEFAULT NULL,
+  `kode_buku` varchar(15) DEFAULT NULL,
+  `tgl_pinjam` date DEFAULT NULL,
+  `tgl_kembali` date DEFAULT NULL,
+  `denda` int(20) DEFAULT NULL,
+  `total_denda` int(20) DEFAULT NULL,
+  `status` varchar(30) DEFAULT NULL,
+  `tgl_dikembalikan` date DEFAULT NULL,
+  PRIMARY KEY (`id_transaksi`),
+  KEY `id_petugas` (`id_petugas`),
+  KEY `nim_anggota` (`nim_anggota`),
+  KEY `kode_buku` (`kode_buku`),
+  CONSTRAINT `tb_transaksi_ibfk_1` FOREIGN KEY (`id_petugas`) REFERENCES `tb_petugas` (`id`),
+  CONSTRAINT `tb_transaksi_ibfk_2` FOREIGN KEY (`nim_anggota`) REFERENCES `tb_anggota` (`nim`),
+  CONSTRAINT `tb_transaksi_ibfk_3` FOREIGN KEY (`kode_buku`) REFERENCES `tb_buku` (`kode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
