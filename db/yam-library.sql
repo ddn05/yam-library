@@ -39,6 +39,7 @@ CREATE TABLE `tb_buku` (
   `tahun` int(4) DEFAULT NULL,
   `penerbit` varchar(40) DEFAULT NULL,
   `kategori` varchar(20) DEFAULT NULL,
+  `stok` int(5) DEFAULT NULL,
   PRIMARY KEY (`kode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

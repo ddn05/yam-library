@@ -167,6 +167,7 @@ class Admin extends CI_Controller {
                 $tahun          = $this->input->post('tahun');
                 $penerbit       = $this->input->post('penerbit');
                 $kategori       = $this->input->post('kategori');
+                $stok           = $this->input->post('stok');
 
                 $data = array(
                         'kode'          => $kode,
@@ -174,7 +175,8 @@ class Admin extends CI_Controller {
                         'penulis'       => $penulis,
                         'tahun'         => $tahun,
                         'penerbit'      => $penerbit,
-                        'kategori'      => $kategori
+                        'kategori'      => $kategori,
+                        'stok'          => $stok
                 );
 
                 $this->form_validation->set_rules('kode','Kode','trim|required');
@@ -183,6 +185,7 @@ class Admin extends CI_Controller {
                 $this->form_validation->set_rules('tahun','Tahun','trim|required');
                 $this->form_validation->set_rules('penerbit','Penerbit','trim|required');
                 $this->form_validation->set_rules('kategori','Kategori','trim|required');
+                $this->form_validation->set_rules('stok','Stok','trim|required');
 
                 if($this->form_validation->run() != false){
                         $this->m_master->insert_data($data,'tb_buku');
@@ -224,13 +227,15 @@ class Admin extends CI_Controller {
                 $tahun          = $this->input->post('tahun');
                 $penerbit       = $this->input->post('penerbit');
                 $kategori       = $this->input->post('kategori');
+                $stok           = $this->input->post('stok');
 
                 $data = array(
                         'judul'         => $judul,
                         'penulis'       => $penulis,
                         'tahun'         => $tahun,
                         'penerbit'      => $penerbit,
-                        'kategori'      => $kategori
+                        'kategori'      => $kategori,
+                        'stok'          => $stok
                 );
 
                 $where = array(
@@ -243,6 +248,7 @@ class Admin extends CI_Controller {
                 $this->form_validation->set_rules('tahun','Tahun','trim|required');
                 $this->form_validation->set_rules('penerbit','Penerbit','trim|required');
                 $this->form_validation->set_rules('kategori','Kategori','trim|required');
+                $this->form_validation->set_rules('stok','Stok','trim|required');
 
                 if($this->form_validation->run() != false){
                         $this->m_master->update_data($where,$data,'tb_buku');
@@ -251,5 +257,70 @@ class Admin extends CI_Controller {
                 else{
                         redirect('admin/buku?pesan=gagalupdate');
                 }
+        }
+
+        public function peminjaman(){
+                $data['judul']   = 'Peminjaman';
+                $data['anggota'] = $this->m_master->get_data('tb_anggota')->result();
+                $data['buku']    = $this->m_master->get_data('tb_buku')->result();
+
+                $this->load->view('template/header',$data);
+                $this->load->view('template/sidebar');
+                $this->load->view('transaksi/v_peminjaman',$data);
+                $this->load->view('template/footer');
+        }
+
+        public function act_peminjaman(){
+                $nim_anggota    = $this->input->post('nim_anggota');
+                $kode_buku      = $this->input->post('kode_buku');
+                $tgl_pinjam     = $this->input->post('tgl_pinjam');
+                $tgl_kembali    = $this->input->post('tgl_kembali');
+                $denda          = $this->input->post('denda');
+
+                $data = array(
+                        'nim_anggota' => $nim_anggota,
+                        'kode_buku'   => $kode_buku,
+                        'tgl_pinjam'  => $tgl_pinjam,
+                        'tgl_kembali' => $tgl_kembali,
+                        'denda'       => $denda
+                );
+
+                $this->form_validation->set_rules('nim_anggota','Nim_anggota','trim|required');
+                $this->form_validation->set_rules('kode_buku','Kode_buku','trim|required');
+                $this->form_validation->set_rules('tgl_pinjam','Tgl_pinjam','trim|required');
+                $this->form_validation->set_rules('tgl_kembali','Tgl_kembali','trim|required');
+                $this->form_validation->set_rules('denda','Denda','trim|required');
+
+                if($this->form_validation->run() != false){
+                        $this->m_master->insert_data($data,'tb_transaksi');
+
+                        //update stok buku
+                        $this->db->where('kode_buku');
+                        $this->db->select('stok');
+                        $this->db->from('tb_buku');
+                        $data  = $this->db->get();
+
+                        $stok  = $data->row_array();
+                        
+                        $hasil = $stok['stok'] - 1;
+
+                        //update stok buku
+                        $d = array (
+                                'stok' => $hasil
+                        );
+
+                        $w = array (
+                                'kode' => $kode_buku
+                        );
+
+                        $this->m_master->update_data($w,$d,'tb_buku');
+
+                        redirect('admin/peminjaman?pesan=berhasil');
+                }
+                else{
+                        redirect('admin/peminjaman?pesan=gagal');
+                }
+                
+
         }
 }

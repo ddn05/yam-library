@@ -22,18 +22,21 @@
                                 <input type="text" class="form-control" id="penulis" placeholder="" name="penulis" value="<?php echo $buk->penulis ?>">
                                 <?php echo form_error('penulis')?>
                             </div>
-                            <div class="form-group">
-                                <label>Penerbit</label>
-                                <input type="text" class="form-control" id="penerbit" placeholder="" name="penerbit" value="<?php echo $buk->penerbit ?>">
-                                <?php echo form_error('penerbit')?>
-                            </div>
+                            
                             <div class="form-row">
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-8">
+                                    <label>Penerbit</label>
+                                    <input type="text" class="form-control" id="penerbit" placeholder="" name="penerbit" value="<?php echo $buk->penerbit ?>">
+                                    <?php echo form_error('penerbit')?>
+                                </div>
+                                <div class="form-group col-md-4">
                                     <label>Tahun Terbit</label>
                                     <input type="number" class="form-control" id="tahun" placeholder="" name="tahun" value="<?php echo $buk->tahun ?>">
                                     <?php echo form_error('tahun')?>
                                 </div>
-                                <div class="form-group col-md-6">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-8">
                                     <label>Kategori</label>
                                     <select id="kategori" class="form-control" name="kategori">
                                         <option><?php echo $buk->kategori ?></option>
@@ -44,6 +47,12 @@
                                     </select>
                                     <?php echo form_error('kategori')?>
                                 </div>
+                                <div class="form-group col-md-4">
+                                    <label>Stok</label>
+                                    <input type="number" class="form-control" id="stok" placeholder="" name="stok" value="<?php echo $buk->stok ?>">
+                                    <?php echo form_error('stok')?>
+                                </div>
+                                
                             </div>
 
                                 <a href="<?php echo base_url()?>admin/buku" class="btn btn-secondary">Batal</a>

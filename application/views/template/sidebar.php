@@ -53,7 +53,7 @@
             </a>
             <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="#">Peminjaman</a>
+                    <a class="collapse-item" href="<?php echo base_url()?>admin/peminjaman">Peminjaman</a>
                     <a class="collapse-item" href="#">Perpanjangan</a>
                     <a class="collapse-item" href="#">Pengembalian</a>
                 </div>

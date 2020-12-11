@@ -43,6 +43,7 @@
                             <th>Tahun</th>
                             <th>Penerbit</th>
                             <th>Kategori</th>
+                            <th>Stok</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -58,6 +59,7 @@
                             <td><?php echo $buk->tahun ?></td>
                             <td><?php echo $buk->penerbit ?></td>
                             <td><?php echo $buk->kategori ?></td>
+                            <td><?php echo $buk->stok ?></td>
                             <td>
                                 <?php echo anchor('admin/edit_buku/'.$buk->kode,'<div class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Data"><i class="fas fa-edit"></i></div>')?>
                                 <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i class="fas fa-trash" data-placement="top" title="Hapus Data" onclick="hapusdata(<?php echo $buk->kode;?>)";></i></a>
@@ -100,18 +102,20 @@
                         <input type="text" class="form-control" id="penulis" placeholder="" name="penulis">
                         <?php echo form_error('penulis')?>
                     </div>
-                    <div class="form-group">
-                        <label>Penerbit</label>
-                        <input type="text" class="form-control" id="penerbit" placeholder="" name="penerbit">
-                        <?php echo form_error('penerbit')?>
-                    </div>
                     <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-9">
+                            <label>Penerbit</label>
+                            <input type="text" class="form-control" id="penerbit" placeholder="" name="penerbit">
+                            <?php echo form_error('penerbit')?>
+                        </div>
+                        <div class="form-group col-md-3">
                             <label>Tahun Terbit</label>
                             <input type="number" class="form-control" id="tahun" placeholder="" name="tahun">
                             <?php echo form_error('tahun')?>
                         </div>
-                        <div class="form-group col-md-6">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-9">
                             <label>Kategori</label>
                             <select id="kategori" class="form-control" name="kategori">
                                 <option>Umum</option>
@@ -119,6 +123,11 @@
                                 <option>Motivasi</option>
                             </select>
                             <?php echo form_error('kategori')?>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Stok</label>
+                            <input type="number" class="form-control" id="stok" placeholder="" name="stok">
+                            <?php echo form_error('stok')?>
                         </div>
                     </div>
                     
