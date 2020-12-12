@@ -295,7 +295,7 @@ class Admin extends CI_Controller {
                         $this->m_master->insert_data($data,'tb_transaksi');
 
                         //update stok buku
-                        $this->db->where('kode_buku');
+                        $this->db->where('kode',$kode_buku);
                         $this->db->select('stok');
                         $this->db->from('tb_buku');
                         $data  = $this->db->get();
