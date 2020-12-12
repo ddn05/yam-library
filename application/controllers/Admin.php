@@ -323,4 +323,43 @@ class Admin extends CI_Controller {
                 
 
         }
+
+        public function lap_peminjaman(){
+                $data['judul']   = 'Laporan Peminjaman';
+                $data['pinjam'] = $this->db->query("select * from tb_transaksi,tb_anggota,tb_buku where nim_anggota=nim and kode_buku=kode")->result();
+
+                $this->load->view('template/header',$data);
+                $this->load->view('template/sidebar');
+                $this->load->view('laporan/v_laptransaksi',$data);
+                $this->load->view('template/footer');
+        }
+
+        public function batal($id_transaksi){
+                $w = array(
+                        'id_transaksi' => $id_transaksi
+                );
+                $this->m_master->delete_data($w,'tb_transaksi');
+                redirect('admin/lap_peminjaman?pesan=berhasil');
+        }
+
+        public function filter_peminjaman(){
+                $data['judul']   = 'Filter Laporan Peminjaman';
+
+                $keyword = $this->input->post('keyword');
+
+                $this->form_validation->set_rules('keyword','Keyword','trim|required');
+
+                if($this->form_validation->run() != false){
+                        $data['pinjam'] = $this->db->query("select * from tb_transaksi,tb_anggota,tb_buku where kode_buku=kode and nim_anggota='$keyword'")->result();
+
+                        $this->load->view('template/header',$data);
+                        $this->load->view('template/sidebar');
+                        $this->load->view('laporan/v_laptransaksi_filter',$data);
+                        $this->load->view('template/footer');
+                }
+
+                else{
+                        redirect('admin/lap_peminjaman');
+                }
+        }
 }

@@ -60,6 +60,21 @@
             </div>
         </li>
 
+        <!-- Nav Item - Utilities Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#laporan" aria-expanded="true" aria-controls="laporan">
+                <i class="fas fa-fw fa-file"></i>
+                <span>Module Laporan</span>
+            </a>
+            <div id="laporan" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="<?php echo base_url()?>admin/lap_peminjaman">Laporan Peminjaman</a>
+                    <a class="collapse-item" href="#">Perpanjangan</a>
+                    <a class="collapse-item" href="#">Pengembalian</a>
+                </div>
+            </div>
+        </li>
+
         <!-- Divider -->
         <hr class="sidebar-divider">
 
