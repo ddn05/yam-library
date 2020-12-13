@@ -276,13 +276,17 @@ class Admin extends CI_Controller {
                 $tgl_pinjam     = $this->input->post('tgl_pinjam');
                 $tgl_kembali    = $this->input->post('tgl_kembali');
                 $denda          = $this->input->post('denda');
+                $status         = 'Belum Dikembalikan';
+                $id_petugas     = $this->session->userdata('id');
 
                 $data = array(
                         'nim_anggota' => $nim_anggota,
                         'kode_buku'   => $kode_buku,
                         'tgl_pinjam'  => $tgl_pinjam,
                         'tgl_kembali' => $tgl_kembali,
-                        'denda'       => $denda
+                        'denda'       => $denda,
+                        'status'      => $status,
+                        'id_petugas'  => $id_petugas
                 );
 
                 $this->form_validation->set_rules('nim_anggota','Nim_anggota','trim|required');
@@ -368,5 +372,20 @@ class Admin extends CI_Controller {
                 else{
                         redirect('admin/lap_peminjaman');
                 }
+        }
+
+        public function pengembalian(){
+                $data['judul']   = 'Pengembalian';
+
+                $data['pinjam'] = $this->db->query("select * from tb_transaksi,tb_anggota,tb_buku where nim_anggota=nim and kode_buku=kode")->result();
+
+                $this->load->view('template/header',$data);
+                $this->load->view('template/sidebar');
+                $this->load->view('transaksi/v_pengembalian',$data);
+                $this->load->view('template/footer');
+        }
+
+        public function kembali(){
+
         }
 }
