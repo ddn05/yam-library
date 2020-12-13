@@ -45,7 +45,7 @@
                             <td><?php echo $pinj->denda?></td>
                             <td><?php echo $pinj->status?></td>
                             <td>
-                                <a href="<?php echo base_url('admin/kembali/'.$pinj->id_transaksi)?>" class="btn btn-sm btn-primary mr-1"><i class="fas fa-sign-in-alt" data-placement="top" title="Pengembaian Buku" onclick="hapusdata(<?php echo $pinj->id_transaksi;?>)";></i></a>
+                                <?php echo anchor('admin/detail_kembali/'.$pinj->id_transaksi,'<div class="btn btn-sm btn-primary mr-1" data-toggle="tooltip" data-placement="top" title="Edit Data"><i class="fas fa-sign-in-alt""></i></div>')?>
                             </td>
                         </tr>
                         <?php } ?>

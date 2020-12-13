@@ -416,7 +416,14 @@ class Admin extends CI_Controller {
                 $this->load->view('template/footer');
         }
 
-        public function kembali(){
+        public function detail_kembali($id_transaksi){
+                $data['judul']   = 'Detail Pengembalian';
 
+                $data['detail'] = $this->db->query("select * from tb_transaksi,tb_anggota,tb_buku where nim_anggota=nim and kode_buku=kode and id_transaksi='$id_transaksi'")->result();
+
+                $this->load->view('template/header',$data);
+                $this->load->view('template/sidebar');
+                $this->load->view('transaksi/v_detkembali',$data);
+                $this->load->view('template/footer');
         }
 }
