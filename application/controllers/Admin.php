@@ -492,4 +492,68 @@ class Admin extends CI_Controller {
                         redirect('admin/pengembalian?pesan=gagal');
                 }
         }
+
+        public function lap_pengembalian(){
+                $data['judul']   = 'Laporan Pengembalian';
+
+                $data['kembali'] = $this->db->query("select * from tb_transaksi,tb_anggota,tb_buku where nim_anggota=nim and kode_buku=kode and tgl_dikembalikan is NOT NULL")->result();
+
+                $this->load->view('template/header',$data);
+                $this->load->view('template/sidebar');
+                $this->load->view('laporan/v_lappengembalian',$data);
+                $this->load->view('template/footer');
+        }
+
+        public function filter_pengembalian_nim(){
+                $data['judul']   = 'Filter Laporan Pengembalian';
+
+                $keyword = $this->input->post('keyword');
+
+                $this->form_validation->set_rules('keyword','Keyword','trim|required');
+
+                if($this->form_validation->run() != false){
+
+                        $this->db->select('*');
+                        $this->db->from('tb_transaksi');
+                        $this->db->join('tb_anggota','tb_anggota.nim = tb_transaksi.nim_anggota');
+                        $this->db->join('tb_buku','tb_buku.kode = tb_transaksi.kode_buku');
+                        $this->db->where('tb_transaksi.tgl_dikembalikan is NOT NULL');
+                        $this->db->where('tb_anggota.nim',$keyword);
+                        
+                        $data['kembali'] = $this->db->get()->result();
+
+                        $this->load->view('template/header',$data);
+                        $this->load->view('template/sidebar');
+                        $this->load->view('laporan/v_lappengembalian_filter_nim',$data);
+                        $this->load->view('template/footer');
+                }
+
+                else{
+                        redirect('admin/lap_peminjaman');
+                }
+        }
+
+        public function filter_pengembalian_tgl(){
+                $data['judul']   = 'Filter Laporan Pengembalian';
+
+                $dari   = $this->input->post('dari');
+                $sampai = $this->input->post('sampai');
+
+                $this->form_validation->set_rules('dari','Dari','trim|required');
+                $this->form_validation->set_rules('sampai','Sampai','trim|required');
+
+                if($this->form_validation->run() != false){
+
+                        $data['kembali'] = $this->db->query("select * from tb_transaksi,tb_anggota,tb_buku where nim_anggota=nim and kode_buku=kode and date(tgl_dikembalikan) is NOT NULL and date(tgl_dikembalikan)>='$dari' and date(tgl_dikembalikan)<='$sampai'")->result();
+
+                        $this->load->view('template/header',$data);
+                        $this->load->view('template/sidebar');
+                        $this->load->view('laporan/v_lappengembalian_filter_tgl',$data);
+                        $this->load->view('template/footer');
+                }
+
+                else{
+                        redirect('admin/lap_pengembalian');
+                }
+        }
 }
