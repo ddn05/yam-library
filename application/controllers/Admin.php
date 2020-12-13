@@ -350,7 +350,14 @@ class Admin extends CI_Controller {
                 $this->form_validation->set_rules('keyword','Keyword','trim|required');
 
                 if($this->form_validation->run() != false){
-                        $data['pinjam'] = $this->db->query("select * from tb_transaksi,tb_anggota,tb_buku where kode_buku=kode and nim_anggota='$keyword'")->result();
+
+                        $this->db->select('*');
+                        $this->db->from('tb_transaksi');
+                        $this->db->join('tb_anggota','tb_anggota.nim = tb_transaksi.nim_anggota');
+                        $this->db->join('tb_buku','tb_buku.kode = tb_transaksi.kode_buku');
+                        $this->db->where('tb_anggota.nim',$keyword);
+                        
+                        $data['pinjam'] = $this->db->get()->result();
 
                         $this->load->view('template/header',$data);
                         $this->load->view('template/sidebar');
