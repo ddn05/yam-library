@@ -27,6 +27,7 @@
                             <th>Judul Buku</th>
                             <th>Tanggal Pinjam</th>
                             <th>Denda</th>
+                            <th>Status</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -42,6 +43,7 @@
                             <td><?php echo $pinj->judul ?></td>
                             <td><?php echo date('d/m/Y',strtotime($pinj->tgl_pinjam)); ?></td>
                             <td><?php echo $pinj->denda?></td>
+                            <td><?php echo $pinj->status?></td>
                             <td>
                                 <a href="<?php echo base_url('admin/kembali/'.$pinj->id_transaksi)?>" class="btn btn-sm btn-primary mr-1"><i class="fas fa-sign-in-alt" data-placement="top" title="Pengembaian Buku" onclick="hapusdata(<?php echo $pinj->id_transaksi;?>)";></i></a>
                             </td>

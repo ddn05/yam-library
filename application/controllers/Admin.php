@@ -339,10 +339,41 @@ class Admin extends CI_Controller {
         }
 
         public function batal($id_transaksi){
+                //update stok buku
+                $this->db->select('kode_buku');
+                $this->db->from('tb_transaksi');
+                $this->db->where('id_transaksi',$id_transaksi);
+                $get_kode = $this->db->get();
+                $get_kode_buku = $get_kode->row_array();
+                $book_code = $get_kode_buku['kode_buku'];
+                
+                $this->db->where('kode',$book_code);
+                $this->db->select('stok');
+                $this->db->from('tb_buku');
+                $data  = $this->db->get();
+
+                $stok  = $data->row_array();
+                
+                $hasil = $stok['stok'] + 1;
+
+                $d = array (
+                        'stok' => $hasil
+                );
+
+                $where = array (
+                        'kode' => $book_code
+                );
+
+                //hapus transaksi
+                $this->m_master->update_data($where,$d,'tb_buku');
+
+                
                 $w = array(
                         'id_transaksi' => $id_transaksi
                 );
+
                 $this->m_master->delete_data($w,'tb_transaksi');
+
                 redirect('admin/lap_peminjaman?pesan=berhasil');
         }
 
