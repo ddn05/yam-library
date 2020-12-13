@@ -330,7 +330,7 @@ class Admin extends CI_Controller {
 
         public function lap_peminjaman(){
                 $data['judul']   = 'Laporan Peminjaman';
-                $data['pinjam'] = $this->db->query("select * from tb_transaksi,tb_anggota,tb_buku where nim_anggota=nim and kode_buku=kode")->result();
+                $data['pinjam'] = $this->db->query("select * from tb_transaksi,tb_anggota,tb_buku where nim_anggota=nim and kode_buku=kode and tgl_dikembalikan is NULL")->result();
 
                 $this->load->view('template/header',$data);
                 $this->load->view('template/sidebar');
@@ -390,6 +390,7 @@ class Admin extends CI_Controller {
                         $this->db->from('tb_transaksi');
                         $this->db->join('tb_anggota','tb_anggota.nim = tb_transaksi.nim_anggota');
                         $this->db->join('tb_buku','tb_buku.kode = tb_transaksi.kode_buku');
+                        $this->db->where('tb_transaksi.tgl_dikembalikan is NULL');
                         $this->db->where('tb_anggota.nim',$keyword);
                         
                         $data['pinjam'] = $this->db->get()->result();
@@ -408,7 +409,7 @@ class Admin extends CI_Controller {
         public function pengembalian(){
                 $data['judul']   = 'Pengembalian';
 
-                $data['pinjam'] = $this->db->query("select * from tb_transaksi,tb_anggota,tb_buku where nim_anggota=nim and kode_buku=kode")->result();
+                $data['pinjam'] = $this->db->query("select * from tb_transaksi,tb_anggota,tb_buku where nim_anggota=nim and kode_buku=kode and tgl_dikembalikan is NULL")->result();
 
                 $this->load->view('template/header',$data);
                 $this->load->view('template/sidebar');
@@ -425,5 +426,70 @@ class Admin extends CI_Controller {
                 $this->load->view('template/sidebar');
                 $this->load->view('transaksi/v_detkembali',$data);
                 $this->load->view('template/footer');
+        }
+
+        public function act_pengembalian(){
+                $id_transaksi      = $this->input->post('id_transaksi');
+                $nim_anggota       = $this->input->post('nim_anggota');
+                $kode_buku         = $this->input->post('kode_buku');
+                $tgl_pinjam        = $this->input->post('tgl_pinjam');
+                $tgl_kembali       = $this->input->post('tgl_kembali');
+                $tgl_dikembalikan  = $this->input->post('tgl_dikembalikan');
+                $denda             = $this->input->post('denda');
+                $total_denda       = $this->input->post('total_denda');
+                $status            = 'Dikembalikan';
+                $id_petugas        = $this->session->userdata('id');
+
+                $where = array(
+                        'id_transaksi'          => $id_transaksi
+                );
+
+                $data = array(
+                        'nim_anggota'           => $nim_anggota,
+                        'kode_buku'             => $kode_buku,
+                        'tgl_pinjam'            => $tgl_pinjam,
+                        'tgl_kembali'           => $tgl_kembali,
+                        'tgl_dikembalikan'      => $tgl_dikembalikan,
+                        'denda'                 => $denda,
+                        'status'                => $status,
+                        'id_petugas'            => $id_petugas
+                );
+
+                $this->form_validation->set_rules('nim_anggota','Nim_anggota','trim|required');
+                $this->form_validation->set_rules('kode_buku','Kode_buku','trim|required');
+                $this->form_validation->set_rules('tgl_pinjam','Tgl_pinjam','trim|required');
+                $this->form_validation->set_rules('tgl_kembali','Tgl_kembali','trim|required');
+                $this->form_validation->set_rules('tgl_dikembalikan','tgl_dikembalikan','trim|required');
+                $this->form_validation->set_rules('total_denda','Total_denda','trim|required');
+
+                if($this->form_validation->run() != false){
+                        $this->m_master->update_data($where,$data,'tb_transaksi');
+
+                        //update stok buku
+                        $this->db->where('kode',$kode_buku);
+                        $this->db->select('stok');
+                        $this->db->from('tb_buku');
+                        $data  = $this->db->get();
+
+                        $stok  = $data->row_array();
+                        
+                        $hasil = $stok['stok'] + 1;
+
+                        //update stok buku
+                        $d = array (
+                                'stok' => $hasil
+                        );
+
+                        $w = array (
+                                'kode' => $kode_buku
+                        );
+
+                        $this->m_master->update_data($w,$d,'tb_buku');
+
+                        redirect('admin/pengembalian?pesan=berhasil');
+                }
+                else{
+                        redirect('admin/pengembalian?pesan=gagal');
+                }
         }
 }

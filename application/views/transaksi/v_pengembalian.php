@@ -12,6 +12,9 @@
                         if($_GET['pesan'] == "berhasil"){
                             echo "<div class='alert alert-success'>Pengembalian Buku Berhasil</div>";
                         }
+                        if($_GET['pesan'] == "gagal"){
+                            echo "<div class='alert alert-danger'>Pengembalian Buku Gagal</div>";
+                        }
                     }
                 ?>
 

@@ -6,12 +6,13 @@
                 <div class="row">
                         <div class="card shadow col-md-5 p-3">
 
-                            <form action="<?php echo base_url().'admin/act_peminjaman'?>" method="post">
+                            <form action="<?php echo base_url().'admin/act_pengembalian'?>" method="post">
                             <?php foreach($detail as $det) { ?>
 
                                 <div class="form-row">
                                     <div class="form-group col-md-4">
                                         <label>NIM</label>
+                                        <input type="hidden" class="form-control" id="id_transaksi" placeholder="" name="id_transaksi" value="<?php echo $det->id_transaksi?>" readonly>
                                         <input type="number" class="form-control" id="nim_anggota" placeholder="" name="nim_anggota" value="<?php echo $det->nim?>" readonly>
                                         <?php echo form_error('nim')?>
                                     </div>
@@ -36,12 +37,12 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label>Tanggal Peminjaman</label>
-                                        <input type="text" class="form-control" id="tgl_pinjam" placeholder="" name="tgl_pinjam" value="<?php echo date('d/m/Y',strtotime($det->tgl_pinjam)); ?>" readonly>
+                                        <input type="date" class="form-control" id="tgl_pinjam" placeholder="" name="tgl_pinjam" value="<?php echo $det->tgl_pinjam?>" readonly>
                                         <?php echo form_error('tgl_pinjam')?>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label>Maksimal Dikembalikan</label>
-                                        <input type="text" class="form-control" id="tgl_kembali" placeholder="" name="tgl_kembali" value="<?php echo date('d/m/Y',strtotime($det->tgl_kembali)); ?>" readonly>
+                                        <input type="date" class="form-control" id="tgl_kembali" placeholder="" name="tgl_kembali" value="<?php echo $det->tgl_kembali?>" readonly>
                                         <?php echo form_error('tgl_kembali')?>
                                     </div>
                                 </div>
@@ -75,8 +76,9 @@
                                             $tot_denda = 0;
                                         }
                                     ?>
-                                    <input type="number" class="form-control" id="jum_denda" placeholder="" name="jum_denda" value="<?php echo $tot_denda?>" readonly>
-                                    <?php echo form_error('jum_denda')?>
+                                    <input type="hidden" class="form-control" id="denda" placeholder="" name="denda" value="<?php echo $det->denda?>" readonly>
+                                    <input type="number" class="form-control" id="total_denda" placeholder="" name="total_denda" value="<?php echo $tot_denda?>" readonly>
+                                    <?php echo form_error('total_denda')?>
                                 </div>
 
                             <?php } ?>
