@@ -556,4 +556,65 @@ class Admin extends CI_Controller {
                         redirect('admin/lap_pengembalian');
                 }
         }
+
+        public function perpanjangan(){
+                $data['judul']   = 'Perpanjangan';
+
+                $data['pinjam'] = $this->db->query("select * from tb_transaksi,tb_anggota,tb_buku where nim_anggota=nim and kode_buku=kode and tgl_dikembalikan is NULL")->result();
+
+                $this->load->view('template/header',$data);
+                $this->load->view('template/sidebar');
+                $this->load->view('transaksi/v_perpanjangan',$data);
+                $this->load->view('template/footer');
+        }
+
+        public function detail_perpanjangan($id_transaksi){
+                $data['judul']   = 'Detail Perpanjangan';
+
+                $data['detail'] = $this->db->query("select * from tb_transaksi,tb_anggota,tb_buku where nim_anggota=nim and kode_buku=kode and id_transaksi='$id_transaksi'")->result();
+
+                $this->load->view('template/header',$data);
+                $this->load->view('template/sidebar');
+                $this->load->view('transaksi/v_detperpanjangan',$data);
+                $this->load->view('template/footer');
+        }
+
+        public function act_perpanjangan(){
+                $id_transaksi      = $this->input->post('id_transaksi');
+                $nim_anggota       = $this->input->post('nim_anggota');
+                $kode_buku         = $this->input->post('kode_buku');
+                $tgl_pinjam        = $this->input->post('tgl_pinjam');
+                $tgl_kembali       = $this->input->post('tgl_kembali');
+                $denda             = $this->input->post('denda');
+                $status            = 'Diperpanjang';
+                $id_petugas        = $this->session->userdata('id');
+
+                $where = array(
+                        'id_transaksi'          => $id_transaksi
+                );
+
+                $data = array(
+                        'nim_anggota'           => $nim_anggota,
+                        'kode_buku'             => $kode_buku,
+                        'tgl_pinjam'            => $tgl_pinjam,
+                        'tgl_kembali'           => $tgl_kembali,
+                        'denda'                 => $denda,
+                        'status'                => $status,
+                        'id_petugas'            => $id_petugas
+                );
+
+                $this->form_validation->set_rules('nim_anggota','Nim_anggota','trim|required');
+                $this->form_validation->set_rules('kode_buku','Kode_buku','trim|required');
+                $this->form_validation->set_rules('tgl_pinjam','Tgl_pinjam','trim|required');
+                $this->form_validation->set_rules('tgl_kembali','Tgl_kembali','trim|required');
+
+                if($this->form_validation->run() != false){
+                        $this->m_master->update_data($where,$data,'tb_transaksi');
+
+                        redirect('admin/perpanjangan?pesan=berhasil');
+                }
+                else{
+                        redirect('admin/perpanjangan?pesan=gagal');
+                }
+        }
 }
