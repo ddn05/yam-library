@@ -640,4 +640,13 @@ class Admin extends CI_Controller {
                 $this->load->view('laporan/v_melebihi',$data);
                 $this->load->view('template/footer');
         }
+
+        public function progress(){
+                $data['judul']   = 'Cek Progress';
+                
+                $this->load->view('template/header',$data);
+                $this->load->view('template/sidebar');
+                $this->load->view('progress/v_progress',$data);
+                $this->load->view('template/footer');
+        }
 }
