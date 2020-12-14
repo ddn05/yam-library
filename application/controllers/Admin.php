@@ -617,4 +617,16 @@ class Admin extends CI_Controller {
                         redirect('admin/perpanjangan?pesan=gagal');
                 }
         }
+
+        public function melebihi(){
+                $data['judul']   = 'Laporan Peminjaman Melebihi Deadline';
+                $date = date("Y-m-d");
+                
+                $data['pinjam'] = $this->db->query("select * from tb_transaksi,tb_anggota,tb_buku where nim_anggota=nim and kode_buku=kode and tgl_kembali < '$date' and tgl_dikembalikan is NULL")->result();
+
+                $this->load->view('template/header',$data);
+                $this->load->view('template/sidebar');
+                $this->load->view('laporan/v_melebihi',$data);
+                $this->load->view('template/footer');
+        }
 }

@@ -4,19 +4,6 @@
             <!-- Page Heading -->
             <h1 class="h3 mb-4 text-gray-800">Data Peminjaman</h1>
 
-            <div class="card shadow mb-4 p-4 col-md-3">
-                <form action="<?php echo base_url().'admin/filter_peminjaman'?>" method="post">
-                <h1 class="h5 mb-4 text-gray-800"><strong>Filter berdasarkan NIM Peminjam</strong> </h1>
-
-                <div class="form-group">
-                    <input type="text" class="form-control" id="keyword" placeholder="Masukan NIM Peminjam" name="keyword">
-                    <?php echo form_error('ulangfilter')?>
-                </div>
-
-                    <button class="btn btn-primary btn-sm" type="submit">Filter</button>
-                </form>
-            </div>
-
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
 
@@ -59,19 +46,9 @@
                             <td><?php echo $pinj->judul ?></td>
                             <td><?php echo date('d/m/Y',strtotime($pinj->tgl_pinjam)); ?></td>
                             <td><?php echo date('d/m/Y',strtotime($pinj->tgl_kembali)); ?></td>
-                            <?php
-                                $date = date("Y-m-d");
-                                
-                                if($pinj->tgl_kembali < $date){
-                            ?>
-                                <td class="text-danger">Melebihi Batas</td>
-                            <?php }
-                                else{
-                            ?>
-                                <td><?php echo $pinj->status ?></td>
-                            <?php }?>
+                            <td class="text-danger">Melebihi Batas</td>
                             <td>
-                                <a href="javascript:void(0);" class="btn btn-sm btn-danger mr-1"><i class="fas fa-window-close" data-placement="top" title="Batalkan Transaksi" onclick="hapusdata(<?php echo $pinj->id_transaksi;?>)";></i></a>
+                                <?php echo anchor('admin/detail_kembali/'.$pinj->id_transaksi,'<div class="btn btn-sm btn-primary mr-1" data-toggle="tooltip" data-placement="top" title="Edit Data"><i class="fas fa-sign-in-alt""></i></div>')?>
                             </td>
                         </tr>
                         <?php } ?>
@@ -83,14 +60,3 @@
 
             </div>
             <!-- /.container-fluid -->
-
-            <script type="text/javascript">
-                var url="<?php echo base_url();?>";
-                function hapusdata(id_transaksi){
-                var r=confirm("Apakah anda yakin akan menghapus data ini ?")
-                    if (r==true)
-                    window.location = url+"admin/batal/"+id_transaksi;
-                    else
-                    return false;
-                } 
-            </script>
