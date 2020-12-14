@@ -13,9 +13,20 @@ class Admin extends CI_Controller {
 	{
                 $data['judul'] = 'Dashboard Admin';
 
+                $data['ang']        = $this->db->get('tb_anggota')->num_rows();
+                $data['buku']           = $this->db->get('tb_buku')->num_rows();
+                $data['borrow']         = $this->db->query("select * from tb_transaksi where tgl_dikembalikan is NULL")->num_rows();
+                $data['kembali']        = $this->db->query("select * from tb_transaksi where tgl_dikembalikan is NOT NULL")->num_rows();
+                $data['pinjam']         = $this->db->query("select * from tb_transaksi,tb_anggota,tb_buku where nim_anggota=nim and kode_buku=kode and tgl_dikembalikan is NULL")->result();
+                
+                $date = date("Y-m-d");
+                $data['melebihi'] = $this->db->query("select * from tb_transaksi,tb_anggota,tb_buku where nim_anggota=nim and kode_buku=kode and tgl_kembali < '$date' and tgl_dikembalikan is NULL")->num_rows();
+                
+                $data['anggota'] = $this->m_master->get_data('tb_anggota')->result();
+
                 $this->load->view('template/header',$data);
                 $this->load->view('template/sidebar');
-                $this->load->view('v_dashboard');
+                $this->load->view('v_dashboard',$data);
                 $this->load->view('template/footer');
         }
         

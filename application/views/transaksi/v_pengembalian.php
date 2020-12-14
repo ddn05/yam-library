@@ -46,7 +46,17 @@
                             <td><?php echo $pinj->judul ?></td>
                             <td><?php echo date('d/m/Y',strtotime($pinj->tgl_pinjam)); ?></td>
                             <td><?php echo $pinj->denda?></td>
-                            <td><?php echo $pinj->status?></td>
+                            <?php
+                                $date = date("Y-m-d");
+                                
+                                if($pinj->tgl_kembali < $date){
+                            ?>
+                                <td class="text-danger">Melebihi Batas</td>
+                            <?php }
+                                else{
+                            ?>
+                                <td><?php echo $pinj->status ?></td>
+                            <?php }?>
                             <td>
                                 <?php echo anchor('admin/detail_kembali/'.$pinj->id_transaksi,'<div class="btn btn-sm btn-primary mr-1" data-toggle="tooltip" data-placement="top" title="Edit Data"><i class="fas fa-sign-in-alt""></i></div>')?>
                             </td>
