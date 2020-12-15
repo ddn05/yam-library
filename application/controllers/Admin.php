@@ -649,4 +649,35 @@ class Admin extends CI_Controller {
                 $this->load->view('progress/v_progress',$data);
                 $this->load->view('template/footer');
         }
+
+        public function progress_result(){
+                $data['judul']   = 'Cek Progress';
+
+                $keyword = $this->input->post('keyword');
+
+                $this->form_validation->set_rules('keyword','Keyword','trim|required');
+
+                $data['anggota']        = $this->db->query("select * from tb_anggota where nim='$keyword'")->result();
+                $data['belum']          = $this->db->query("select * from tb_transaksi where nim_anggota='$keyword' and tgl_dikembalikan is NULL")->num_rows();
+                $data['kembali']        = $this->db->query("select * from tb_transaksi where nim_anggota='$keyword' and tgl_dikembalikan is NOT NULL")->num_rows();
+                $data['jumlah']         = $this->db->query("select * from tb_transaksi where nim_anggota='$keyword'")->num_rows();
+
+                $this->db->select('*');
+                $this->db->from('tb_transaksi');
+                $this->db->join('tb_anggota','tb_anggota.nim = tb_transaksi.nim_anggota');
+                $this->db->join('tb_buku','tb_buku.kode = tb_transaksi.kode_buku');
+                $this->db->where('tb_anggota.nim',$keyword);
+                        
+                $data['cek'] = $this->db->get()->result();
+
+                if($this->form_validation->run() != false){
+                        $this->load->view('template/header',$data);
+                        $this->load->view('template/sidebar');
+                        $this->load->view('progress/v_progress_result',$data);
+                        $this->load->view('template/footer');
+                }
+                else{
+                        redirect('admin/progress');
+                }
+        }
 }
