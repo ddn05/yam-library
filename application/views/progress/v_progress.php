@@ -21,7 +21,7 @@
                 </div>
 
                 <div class="card shadow mb-4 p-4 col-md-3 ml-3">
-                    <form action="<?php echo base_url().'admin/filter_pengembalian_nim'?>" method="post">
+                    <form action="<?php echo base_url().'admin/progress_buku'?>" method="post">
                     <h1 class="h5 mb-4 text-gray-800"><strong>Masukan Kode Buku</strong> </h1>
 
                     <div class="form-group">

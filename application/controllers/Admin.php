@@ -680,4 +680,34 @@ class Admin extends CI_Controller {
                         redirect('admin/progress');
                 }
         }
+
+        public function progress_buku(){
+                $data['judul']   = 'Cek Progress';
+
+                $keyword = $this->input->post('keyword');
+
+                $this->form_validation->set_rules('keyword','Keyword','trim|required');
+
+                $data['buku']           = $this->db->query("select * from  tb_buku where kode='$keyword'")->result();
+                $data['belum']          = $this->db->query("select * from tb_transaksi where kode_buku='$keyword' and tgl_dikembalikan is NULL")->num_rows();
+                $data['kembali']        = $this->db->query("select * from tb_transaksi where kode_buku='$keyword' and tgl_dikembalikan is NOT NULL")->num_rows();
+
+                $this->db->select('*');
+                $this->db->from('tb_transaksi');
+                $this->db->join('tb_anggota','tb_anggota.nim = tb_transaksi.nim_anggota');
+                $this->db->join('tb_buku','tb_buku.kode = tb_transaksi.kode_buku');
+                $this->db->where('tb_buku.kode',$keyword);
+                        
+                $data['cek'] = $this->db->get()->result();
+
+                if($this->form_validation->run() != false){
+                        $this->load->view('template/header',$data);
+                        $this->load->view('template/sidebar');
+                        $this->load->view('progress/v_progress_buku',$data);
+                        $this->load->view('template/footer');
+                }
+                else{
+                        redirect('admin/progress');
+                }
+        }
 }
