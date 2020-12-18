@@ -120,10 +120,10 @@
 
             <script type="text/javascript">
                 var url="<?php echo base_url();?>";
-                function hapusdata(id){
+                function hapusdata(nim){
                 var r=confirm("Apakah anda yakin akan menghapus data ini ?")
                     if (r==true)
-                    window.location = url+"admin/hapus_anggota/"+id;
+                    window.location = url+"admin/hapus_anggota/"+nim;
                     else
                     return false;
                 } 

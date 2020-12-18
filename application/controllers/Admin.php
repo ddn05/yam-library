@@ -68,7 +68,7 @@ class Admin extends CI_Controller {
                 
         }
 
-        public function hapus_anggota($id){
+        public function hapus_anggota($nim){
                 $where = array(
                         'nim' => $nim
                 );

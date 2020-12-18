@@ -75,7 +75,7 @@
             <script type="text/javascript">
                 var url="<?php echo base_url();?>";
                 function hapusdata(id_transaksi){
-                var r=confirm("Apakah anda yakin akan menghapus data ini ?")
+                var r=confirm("Apakah anda yakin akan membatalkan transaksi ini ?")
                     if (r==true)
                     window.location = url+"admin/batal/"+id_transaksi;
                     else
