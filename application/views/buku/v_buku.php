@@ -3,6 +3,18 @@
 
             <!-- Page Heading -->
             <h1 class="h3 mb-4 text-gray-800">Data Buku</h1>
+            <div>
+                <a href="<?php echo base_url()?>admin/buku" class="btn <?php echo $semua?> btn-sm mb-2"></i>Semua</a>
+                <a href="<?php echo base_url()?>admin/buku_umum" class="btn <?php echo $umum?> btn-sm mb-2"></i>Umum</a>
+                <a href="<?php echo base_url()?>admin/buku_motivasi" class="btn <?php echo $motivasi?> btn-sm mb-2"></i>Motivasi</a>
+                <a href="<?php echo base_url()?>admin/buku_sejarah" class="btn <?php echo $sejarah?> btn-sm mb-2"></i>Sejarah</a>
+                <a href="<?php echo base_url()?>admin/buku_panduan" class="btn <?php echo $panduan?> btn-sm mb-2"></i>Panduan</a>
+                <a href="<?php echo base_url()?>admin/buku_religi" class="btn <?php echo $religi?> btn-sm mb-2"></i>Religi</a>
+                <a href="<?php echo base_url()?>admin/buku_filsafat" class="btn <?php echo $filsafat?> btn-sm mb-2"></i>Filsafat</a>
+                <a href="<?php echo base_url()?>admin/buku_kamus" class="btn <?php echo $kamus?> btn-sm mb-2"></i>Kamus</a>
+                <a href="<?php echo base_url()?>admin/buku_psikologi" class="btn <?php echo $psikologi?> btn-sm mb-2"></i>Psikologi</a>
+                <a href="<?php echo base_url()?>admin/buku_negara" class="btn <?php echo $negara?> btn-sm mb-2"></i>Negara</a>
+            </div>
 
             <!-- DataTales Example -->
             <div class="card shadow mb-4">

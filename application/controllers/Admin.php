@@ -162,8 +162,208 @@ class Admin extends CI_Controller {
         }
 
         public function buku(){
+                $data['judul']  = 'Data Buku';
+                $data['buku']   = $this->m_master->get_data('tb_buku')->result();
+
+                $data['semua']      = 'btn-info';
+                $data['umum']       = 'btn-secondary';
+                $data['motivasi']   = 'btn-secondary';
+                $data['sejarah']    = 'btn-secondary';
+                $data['panduan']    = 'btn-secondary';
+                $data['religi']     = 'btn-secondary';
+                $data['filsafat']   = 'btn-secondary';
+                $data['kamus']      = 'btn-secondary';
+                $data['psikologi']  = 'btn-secondary';
+                $data['negara']     = 'btn-secondary';
+
+                $this->load->view('template/header',$data);
+                $this->load->view('template/sidebar');
+                $this->load->view('buku/v_buku',$data);
+                $this->load->view('template/footer');
+        }
+
+        public function buku_umum(){
                 $data['judul'] = 'Data Buku';
-                $data['buku'] = $this->m_master->get_data('tb_buku')->result();
+                $data['buku'] = $this->db->get_where('tb_buku', array('kategori' => 'umum'))->result();
+
+                $data['semua']      = 'btn-secondary';
+                $data['umum']       = 'btn-info';
+                $data['motivasi']   = 'btn-secondary';
+                $data['sejarah']    = 'btn-secondary';
+                $data['panduan']    = 'btn-secondary';
+                $data['religi']     = 'btn-secondary';
+                $data['filsafat']   = 'btn-secondary';
+                $data['kamus']      = 'btn-secondary';
+                $data['psikologi']  = 'btn-secondary';
+                $data['negara']     = 'btn-secondary';
+
+                $this->load->view('template/header',$data);
+                $this->load->view('template/sidebar');
+                $this->load->view('buku/v_buku',$data);
+                $this->load->view('template/footer');
+        }
+        
+        public function buku_motivasi(){
+                $data['judul'] = 'Data Buku';
+                $data['buku'] = $this->db->get_where('tb_buku', array('kategori' => 'motivasi'))->result();
+
+                $data['semua']      = 'btn-secondary';
+                $data['umum']       = 'btn-secondary';
+                $data['motivasi']   = 'btn-info';
+                $data['sejarah']    = 'btn-secondary';
+                $data['panduan']    = 'btn-secondary';
+                $data['religi']     = 'btn-secondary';
+                $data['filsafat']   = 'btn-secondary';
+                $data['kamus']      = 'btn-secondary';
+                $data['psikologi']  = 'btn-secondary';
+                $data['negara']     = 'btn-secondary';
+
+                $this->load->view('template/header',$data);
+                $this->load->view('template/sidebar');
+                $this->load->view('buku/v_buku',$data);
+                $this->load->view('template/footer');
+        }
+
+        public function buku_sejarah(){
+                $data['judul'] = 'Data Buku';
+                $data['buku'] = $this->db->get_where('tb_buku', array('kategori' => 'sejarah'))->result();
+
+                $data['semua']      = 'btn-secondary';
+                $data['umum']       = 'btn-secondary';
+                $data['motivasi']   = 'btn-secondary';
+                $data['sejarah']    = 'btn-info';
+                $data['panduan']    = 'btn-secondary';
+                $data['religi']     = 'btn-secondary';
+                $data['filsafat']   = 'btn-secondary';
+                $data['kamus']      = 'btn-secondary';
+                $data['psikologi']  = 'btn-secondary';
+                $data['negara']     = 'btn-secondary';
+
+                $this->load->view('template/header',$data);
+                $this->load->view('template/sidebar');
+                $this->load->view('buku/v_buku',$data);
+                $this->load->view('template/footer');
+        }
+
+        public function buku_panduan(){
+                $data['judul'] = 'Data Buku';
+                $data['buku'] = $this->db->get_where('tb_buku', array('kategori' => 'panduan'))->result();
+
+                $data['semua']      = 'btn-secondary';
+                $data['umum']       = 'btn-secondary';
+                $data['motivasi']   = 'btn-secondary';
+                $data['sejarah']    = 'btn-secondary';
+                $data['panduan']    = 'btn-info';
+                $data['religi']     = 'btn-secondary';
+                $data['filsafat']   = 'btn-secondary';
+                $data['kamus']      = 'btn-secondary';
+                $data['psikologi']  = 'btn-secondary';
+                $data['negara']     = 'btn-secondary';
+
+                $this->load->view('template/header',$data);
+                $this->load->view('template/sidebar');
+                $this->load->view('buku/v_buku',$data);
+                $this->load->view('template/footer');
+        }
+
+        public function buku_religi(){
+                $data['judul'] = 'Data Buku';
+                $data['buku'] = $this->db->get_where('tb_buku', array('kategori' => 'religi'))->result();
+
+                $data['semua']      = 'btn-secondary';
+                $data['umum']       = 'btn-secondary';
+                $data['motivasi']   = 'btn-secondary';
+                $data['sejarah']    = 'btn-secondary';
+                $data['panduan']    = 'btn-secondary';
+                $data['religi']     = 'btn-info';
+                $data['filsafat']   = 'btn-secondary';
+                $data['kamus']      = 'btn-secondary';
+                $data['psikologi']  = 'btn-secondary';
+                $data['negara']     = 'btn-secondary';
+
+                $this->load->view('template/header',$data);
+                $this->load->view('template/sidebar');
+                $this->load->view('buku/v_buku',$data);
+                $this->load->view('template/footer');
+        }
+
+        public function buku_filsafat(){
+                $data['judul'] = 'Data Buku';
+                $data['buku'] = $this->db->get_where('tb_buku', array('kategori' => 'filsafat'))->result();
+
+                $data['semua']      = 'btn-secondary';
+                $data['umum']       = 'btn-secondary';
+                $data['motivasi']   = 'btn-secondary';
+                $data['sejarah']    = 'btn-secondary';
+                $data['panduan']    = 'btn-secondary';
+                $data['religi']     = 'btn-secondary';
+                $data['filsafat']   = 'btn-info';
+                $data['kamus']      = 'btn-secondary';
+                $data['psikologi']  = 'btn-secondary';
+                $data['negara']     = 'btn-secondary';
+
+                $this->load->view('template/header',$data);
+                $this->load->view('template/sidebar');
+                $this->load->view('buku/v_buku',$data);
+                $this->load->view('template/footer');
+        }
+
+        public function buku_kamus(){
+                $data['judul'] = 'Data Buku';
+                $data['buku'] = $this->db->get_where('tb_buku', array('kategori' => 'kamus'))->result();
+
+                $data['semua']      = 'btn-secondary';
+                $data['umum']       = 'btn-secondary';
+                $data['motivasi']   = 'btn-secondary';
+                $data['sejarah']    = 'btn-secondary';
+                $data['panduan']    = 'btn-secondary';
+                $data['religi']     = 'btn-secondary';
+                $data['filsafat']   = 'btn-secondary';
+                $data['kamus']      = 'btn-info';
+                $data['psikologi']  = 'btn-secondary';
+                $data['negara']     = 'btn-secondary';
+
+                $this->load->view('template/header',$data);
+                $this->load->view('template/sidebar');
+                $this->load->view('buku/v_buku',$data);
+                $this->load->view('template/footer');
+        }
+
+        public function buku_psikologi(){
+                $data['judul'] = 'Data Buku';
+                $data['buku'] = $this->db->get_where('tb_buku', array('kategori' => 'psikologi'))->result();
+
+                $data['semua']      = 'btn-secondary';
+                $data['umum']       = 'btn-secondary';
+                $data['motivasi']   = 'btn-secondary';
+                $data['sejarah']    = 'btn-secondary';
+                $data['panduan']    = 'btn-secondary';
+                $data['religi']     = 'btn-secondary';
+                $data['filsafat']   = 'btn-secondary';
+                $data['kamus']      = 'btn-secondary';
+                $data['psikologi']  = 'btn-info';
+                $data['negara']     = 'btn-secondary';
+
+                $this->load->view('template/header',$data);
+                $this->load->view('template/sidebar');
+                $this->load->view('buku/v_buku',$data);
+                $this->load->view('template/footer');
+        }
+
+        public function buku_negara(){
+                $data['judul'] = 'Data Buku';
+                $data['buku'] = $this->db->get_where('tb_buku', array('kategori' => 'negara'))->result();
+
+                $data['semua']      = 'btn-secondary';
+                $data['umum']       = 'btn-secondary';
+                $data['motivasi']   = 'btn-secondary';
+                $data['sejarah']    = 'btn-secondary';
+                $data['panduan']    = 'btn-secondary';
+                $data['religi']     = 'btn-secondary';
+                $data['filsafat']   = 'btn-secondary';
+                $data['kamus']      = 'btn-secondary';
+                $data['psikologi']  = 'btn-secondary';
+                $data['negara']     = 'btn-info';
 
                 $this->load->view('template/header',$data);
                 $this->load->view('template/sidebar');
