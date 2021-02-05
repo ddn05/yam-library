@@ -1,6 +1,6 @@
 /*
-SQLyog Professional v12.5.1 (32 bit)
-MySQL - 10.4.13-MariaDB : Database - yam-library
+SQLyog Community v13.1.6 (64 bit)
+MySQL - 10.4.11-MariaDB : Database - yam-library
 *********************************************************************
 */
 
@@ -28,32 +28,23 @@ CREATE TABLE `tb_anggota` (
   PRIMARY KEY (`nim`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-/*Data for the table `tb_anggota` */
-
-insert  into `tb_anggota`(`nim`,`nama`,`jk`,`alamat`) values 
-(1177050026,'Dadan','Laki-Laki','Bandung'),
-(1177050028,'Deden furqon','Laki-Laki','Sumedang');
-
 /*Table structure for table `tb_buku` */
 
 DROP TABLE IF EXISTS `tb_buku`;
 
 CREATE TABLE `tb_buku` (
-  `kode` varchar(10) NOT NULL,
+  `kode` int(4) NOT NULL,
   `judul` varchar(40) DEFAULT NULL,
   `penulis` varchar(40) DEFAULT NULL,
   `tahun` int(4) DEFAULT NULL,
-  `penerbit` varchar(40) DEFAULT NULL,
-  `kategori` varchar(20) DEFAULT NULL,
-  `stok` int(5) DEFAULT NULL,
+  `halaman` int(4) DEFAULT NULL,
+  `penerbit` varchar(20) DEFAULT NULL,
+  `kategori` varchar(10) DEFAULT NULL,
+  `stok` int(4) DEFAULT NULL,
+  `sumber` varchar(10) DEFAULT NULL,
+  `kondisi` varchar(4) DEFAULT NULL,
   PRIMARY KEY (`kode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-/*Data for the table `tb_buku` */
-
-insert  into `tb_buku`(`kode`,`judul`,`penulis`,`tahun`,`penerbit`,`kategori`,`stok`) values 
-('112','Sebuah Seni Untuk Bersikap Bodo Amat','Mark Manson',2020,'Jembar.id','Umum',5),
-('113','La Tahzan Innalloha Ma\'ana','Saeful',2002,'Jembar.id','Agama',7);
 
 /*Table structure for table `tb_petugas` */
 
@@ -62,16 +53,10 @@ DROP TABLE IF EXISTS `tb_petugas`;
 CREATE TABLE `tb_petugas` (
   `id` int(30) NOT NULL,
   `nama` varchar(30) DEFAULT NULL,
-  `username` varchar(30) DEFAULT NULL,
+  `username` varchar(30) NOT NULL,
   `password` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`,`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-/*Data for the table `tb_petugas` */
-
-insert  into `tb_petugas`(`id`,`nama`,`username`,`password`) values 
-(0,'Dadan','admin','0192023a7bbd73250516f069df18b500'),
-(1,'Dadan','admin','0192023a7bbd73250516f069df18b500');
 
 /*Table structure for table `tb_transaksi` */
 
@@ -81,7 +66,7 @@ CREATE TABLE `tb_transaksi` (
   `id_transaksi` int(30) NOT NULL AUTO_INCREMENT,
   `id_petugas` int(30) DEFAULT NULL,
   `nim_anggota` int(12) DEFAULT NULL,
-  `kode_buku` varchar(15) DEFAULT NULL,
+  `kode_buku` int(4) DEFAULT NULL,
   `tgl_pinjam` date DEFAULT NULL,
   `tgl_kembali` date DEFAULT NULL,
   `denda` int(20) DEFAULT NULL,
@@ -91,18 +76,11 @@ CREATE TABLE `tb_transaksi` (
   PRIMARY KEY (`id_transaksi`),
   KEY `id_petugas` (`id_petugas`),
   KEY `nim_anggota` (`nim_anggota`),
-  KEY `kode_buku` (`kode_buku`),
+  KEY `tb_transaksi_ibfk_3` (`kode_buku`),
   CONSTRAINT `tb_transaksi_ibfk_1` FOREIGN KEY (`id_petugas`) REFERENCES `tb_petugas` (`id`),
   CONSTRAINT `tb_transaksi_ibfk_2` FOREIGN KEY (`nim_anggota`) REFERENCES `tb_anggota` (`nim`),
   CONSTRAINT `tb_transaksi_ibfk_3` FOREIGN KEY (`kode_buku`) REFERENCES `tb_buku` (`kode`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4;
-
-/*Data for the table `tb_transaksi` */
-
-insert  into `tb_transaksi`(`id_transaksi`,`id_petugas`,`nim_anggota`,`kode_buku`,`tgl_pinjam`,`tgl_kembali`,`denda`,`total_denda`,`status`,`tgl_dikembalikan`) values 
-(20,0,1177050026,'113','2020-12-13','2020-12-20',100,NULL,'Dikembalikan','2020-12-13'),
-(21,0,1177050026,'113','2020-12-13','2020-12-20',100,NULL,'Dikembalikan','2020-12-13'),
-(22,0,1177050026,'112','2020-12-13','2020-12-20',100,NULL,'Belum Dikembalikan',NULL);
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
