@@ -245,17 +245,23 @@ class Admin extends CI_Controller {
                 $judul          = $this->input->post('judul');
                 $penulis        = $this->input->post('penulis');
                 $tahun          = $this->input->post('tahun');
-                $penerbit       = $this->input->post('penerbit');
+                $halaman        = $this->input->post('halaman');
                 $kategori       = $this->input->post('kategori');
+                $penerbit       = $this->input->post('penerbit');
                 $stok           = $this->input->post('stok');
+                $sumber         = $this->input->post('sumber');
+                $kondisi        = $this->input->post('kondisi');
 
                 $data = array(
                         'judul'         => $judul,
                         'penulis'       => $penulis,
                         'tahun'         => $tahun,
-                        'penerbit'      => $penerbit,
+                        'halaman'       => $halaman,
                         'kategori'      => $kategori,
-                        'stok'          => $stok
+                        'penerbit'      => $penerbit,
+                        'stok'          => $stok,
+                        'sumber'        => $sumber,
+                        'kondisi'       => $kondisi
                 );
 
                 $where = array(
@@ -266,9 +272,12 @@ class Admin extends CI_Controller {
                 $this->form_validation->set_rules('judul','Judul','trim|required');
                 $this->form_validation->set_rules('penulis','Penulis','trim|required');
                 $this->form_validation->set_rules('tahun','Tahun','trim|required');
-                $this->form_validation->set_rules('penerbit','Penerbit','trim|required');
+                $this->form_validation->set_rules('halaman','Halaman','trim|required');
                 $this->form_validation->set_rules('kategori','Kategori','trim|required');
+                $this->form_validation->set_rules('penerbit','Penerbit','trim|required');
                 $this->form_validation->set_rules('stok','Stok','trim|required');
+                $this->form_validation->set_rules('sumber','Sumber','trim|required');
+                $this->form_validation->set_rules('kondisi','Kondisi','trim|required');
 
                 if($this->form_validation->run() != false){
                         $this->m_master->update_data($where,$data,'tb_buku');

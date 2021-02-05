@@ -41,7 +41,6 @@
                             <th>Judul</th>
                             <th>Penulis</th>
                             <th>Tahun</th>
-                            <th>Penerbit</th>
                             <th>Kategori</th>
                             <th>Stok</th>
                             <th>Aksi</th>
@@ -57,7 +56,6 @@
                             <td><?php echo $buk->judul ?></td>
                             <td><?php echo $buk->penulis ?></td>
                             <td><?php echo $buk->tahun ?></td>
-                            <td><?php echo $buk->penerbit ?></td>
                             <td><?php echo $buk->kategori ?></td>
                             <td><?php echo $buk->stok ?></td>
                             <td>
