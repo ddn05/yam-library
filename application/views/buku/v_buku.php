@@ -89,7 +89,7 @@
                 <?php echo form_open_multipart('admin/input_buku');?>
                     <div class="form-group">
                         <label>Kode</label>
-                        <input type="text" class="form-control" id="kode" placeholder="" name="kode">
+                        <input type="number" class="form-control" id="kode" placeholder="" name="kode">
                         <?php echo form_error('kode')?>
                     </div>
                     <div class="form-group">
@@ -103,26 +103,37 @@
                         <?php echo form_error('penulis')?>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-9">
-                            <label>Penerbit</label>
-                            <input type="text" class="form-control" id="penerbit" placeholder="" name="penerbit">
-                            <?php echo form_error('penerbit')?>
-                        </div>
                         <div class="form-group col-md-3">
-                            <label>Tahun Terbit</label>
+                            <label>Tahun</label>
                             <input type="number" class="form-control" id="tahun" placeholder="" name="tahun">
                             <?php echo form_error('tahun')?>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Halaman</label>
+                            <input type="number" class="form-control" id="halaman" placeholder="" name="halaman">
+                            <?php echo form_error('halaman')?>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Kategori</label>
+                            <select id="kategori" class="form-control" name="kategori">
+                                <option>Umum</option>
+                                <option>Motivasi</option>
+                                <option>Sejarah</option>
+                                <option>Panduan</option>
+                                <option>Religi</option>
+                                <option>Filsafat</option>
+                                <option>Kamus</option>
+                                <option>Psikologi</option>
+                                <option>Negara</option>
+                            </select>
+                            <?php echo form_error('kategori')?>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-9">
-                            <label>Kategori</label>
-                            <select id="kategori" class="form-control" name="kategori">
-                                <option>Umum</option>
-                                <option>Agama</option>
-                                <option>Motivasi</option>
-                            </select>
-                            <?php echo form_error('kategori')?>
+                            <label>Penerbit</label>
+                            <input type="text" class="form-control" id="penerbit" placeholder="" name="penerbit">
+                            <?php echo form_error('penerbit')?>
                         </div>
                         <div class="form-group col-md-3">
                             <label>Stok</label>
@@ -130,8 +141,26 @@
                             <?php echo form_error('stok')?>
                         </div>
                     </div>
-                    
-                </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Sumber</label>
+                            <select id="sumber" class="form-control" name="sumber">
+                                <option>Yayasan</option>
+                                <option>Organisasi</option>
+                                <option>Donasi</option>
+                            </select>
+                            <?php echo form_error('sumber')?>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Kondisi</label>
+                            <select id="kondisi" class="form-control" name="kondisi">
+                                <option>Lama</option>
+                                <option>Baru</option>
+                            </select>
+                            <?php echo form_error('kondisi')?>
+                        </div>
+                    </div>
+                    </div>
                 <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                         <button type="submit" class="btn btn-primary">Simpan</button>
