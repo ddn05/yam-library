@@ -175,6 +175,7 @@ class Admin extends CI_Controller {
                 $data['kamus']      = 'btn-secondary';
                 $data['psikologi']  = 'btn-secondary';
                 $data['negara']     = 'btn-secondary';
+                $data['ekonomi']    = 'btn-secondary';
 
                 $this->load->view('template/header',$data);
                 $this->load->view('template/sidebar');
@@ -196,6 +197,7 @@ class Admin extends CI_Controller {
                 $data['kamus']      = 'btn-secondary';
                 $data['psikologi']  = 'btn-secondary';
                 $data['negara']     = 'btn-secondary';
+                $data['ekonomi']    = 'btn-secondary';
 
                 $this->load->view('template/header',$data);
                 $this->load->view('template/sidebar');
@@ -217,6 +219,7 @@ class Admin extends CI_Controller {
                 $data['kamus']      = 'btn-secondary';
                 $data['psikologi']  = 'btn-secondary';
                 $data['negara']     = 'btn-secondary';
+                $data['ekonomi']    = 'btn-secondary';
 
                 $this->load->view('template/header',$data);
                 $this->load->view('template/sidebar');
@@ -238,6 +241,7 @@ class Admin extends CI_Controller {
                 $data['kamus']      = 'btn-secondary';
                 $data['psikologi']  = 'btn-secondary';
                 $data['negara']     = 'btn-secondary';
+                $data['ekonomi']    = 'btn-secondary';
 
                 $this->load->view('template/header',$data);
                 $this->load->view('template/sidebar');
@@ -259,6 +263,7 @@ class Admin extends CI_Controller {
                 $data['kamus']      = 'btn-secondary';
                 $data['psikologi']  = 'btn-secondary';
                 $data['negara']     = 'btn-secondary';
+                $data['ekonomi']    = 'btn-secondary';
 
                 $this->load->view('template/header',$data);
                 $this->load->view('template/sidebar');
@@ -280,6 +285,7 @@ class Admin extends CI_Controller {
                 $data['kamus']      = 'btn-secondary';
                 $data['psikologi']  = 'btn-secondary';
                 $data['negara']     = 'btn-secondary';
+                $data['ekonomi']    = 'btn-secondary';
 
                 $this->load->view('template/header',$data);
                 $this->load->view('template/sidebar');
@@ -301,6 +307,7 @@ class Admin extends CI_Controller {
                 $data['kamus']      = 'btn-secondary';
                 $data['psikologi']  = 'btn-secondary';
                 $data['negara']     = 'btn-secondary';
+                $data['ekonomi']    = 'btn-secondary';
 
                 $this->load->view('template/header',$data);
                 $this->load->view('template/sidebar');
@@ -322,6 +329,7 @@ class Admin extends CI_Controller {
                 $data['kamus']      = 'btn-info';
                 $data['psikologi']  = 'btn-secondary';
                 $data['negara']     = 'btn-secondary';
+                $data['ekonomi']    = 'btn-secondary';
 
                 $this->load->view('template/header',$data);
                 $this->load->view('template/sidebar');
@@ -343,6 +351,7 @@ class Admin extends CI_Controller {
                 $data['kamus']      = 'btn-secondary';
                 $data['psikologi']  = 'btn-info';
                 $data['negara']     = 'btn-secondary';
+                $data['ekonomi']    = 'btn-secondary';
 
                 $this->load->view('template/header',$data);
                 $this->load->view('template/sidebar');
@@ -364,6 +373,29 @@ class Admin extends CI_Controller {
                 $data['kamus']      = 'btn-secondary';
                 $data['psikologi']  = 'btn-secondary';
                 $data['negara']     = 'btn-info';
+                $data['ekonomi']    = 'btn-secondary';
+
+                $this->load->view('template/header',$data);
+                $this->load->view('template/sidebar');
+                $this->load->view('buku/v_buku',$data);
+                $this->load->view('template/footer');
+        }
+
+        public function buku_ekonomi(){
+                $data['judul'] = 'Data Buku';
+                $data['buku'] = $this->db->get_where('tb_buku', array('kategori' => 'ekonomi'))->result();
+
+                $data['semua']      = 'btn-secondary';
+                $data['umum']       = 'btn-secondary';
+                $data['motivasi']   = 'btn-secondary';
+                $data['sejarah']    = 'btn-secondary';
+                $data['panduan']    = 'btn-secondary';
+                $data['religi']     = 'btn-secondary';
+                $data['filsafat']   = 'btn-secondary';
+                $data['kamus']      = 'btn-secondary';
+                $data['psikologi']  = 'btn-secondary';
+                $data['negara']     = 'btn-secondary';
+                $data['ekonomi']    = 'btn-info';
 
                 $this->load->view('template/header',$data);
                 $this->load->view('template/sidebar');

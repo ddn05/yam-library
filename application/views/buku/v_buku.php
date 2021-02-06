@@ -14,6 +14,7 @@
                 <a href="<?php echo base_url()?>admin/buku_kamus" class="btn <?php echo $kamus?> btn-sm mb-2"></i>Kamus</a>
                 <a href="<?php echo base_url()?>admin/buku_psikologi" class="btn <?php echo $psikologi?> btn-sm mb-2"></i>Psikologi</a>
                 <a href="<?php echo base_url()?>admin/buku_negara" class="btn <?php echo $negara?> btn-sm mb-2"></i>Negara</a>
+                <a href="<?php echo base_url()?>admin/buku_ekonomi" class="btn <?php echo $ekonomi?> btn-sm mb-2"></i>Ekonomi</a>
             </div>
 
             <!-- DataTales Example -->
@@ -135,6 +136,7 @@
                                 <option>Kamus</option>
                                 <option>Psikologi</option>
                                 <option>Negara</option>
+                                <option>Ekonomi</option>
                             </select>
                             <?php echo form_error('kategori')?>
                         </div>
