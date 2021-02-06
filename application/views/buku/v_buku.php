@@ -15,6 +15,7 @@
                 <a href="<?php echo base_url()?>admin/buku_psikologi" class="btn <?php echo $psikologi?> btn-sm mb-2"></i>Psikologi</a>
                 <a href="<?php echo base_url()?>admin/buku_negara" class="btn <?php echo $negara?> btn-sm mb-2"></i>Negara</a>
                 <a href="<?php echo base_url()?>admin/buku_ekonomi" class="btn <?php echo $ekonomi?> btn-sm mb-2"></i>Ekonomi</a>
+                <a href="<?php echo base_url()?>admin/buku_pendidikan" class="btn <?php echo $pendidikan?> btn-sm mb-2"></i>Pendidikan</a>
             </div>
 
             <!-- DataTales Example -->
@@ -42,7 +43,7 @@
 
                 <div class="card-header py-3">
                     <a href="" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#buku"><i class="fas fa-plus mr-2"></i>Tambah Buku</a>
-                    <a href="" class="btn btn-sm btn-warning"><i class="fas fa-print mr-2"></i>Cetak Laporan</a>
+                    <a href="" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#cet_laporan"><i class="fas fa-print mr-2"></i>Cetak Laporan</a>
                 </div>
                 <div class="card-body">
                 <div class="table-responsive">
@@ -181,7 +182,32 @@
                 </div>
             </div>
             </div>
-
+            
+            <div class="modal fade" tabindex="-1" id="cet_laporan" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fas fa-print mr-2"></i>Cetak Laporan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <a href="<?php echo base_url()?>admin/cetak" class="btn btn-sm btn-warning mb-2" target="_blank"><i class="fas fa-print mr-2"></i>Semua Data</a>
+                    <a href="<?php echo base_url()?>admin/cetak_motivasi" class="btn btn-sm btn-warning mb-2" target="_blank"><i class="fas fa-print mr-2"></i>Motivasi</a>
+                    <a href="<?php echo base_url()?>admin/cetak_sejarah" class="btn btn-sm btn-warning mb-2" target="_blank"><i class="fas fa-print mr-2"></i>Sejarah</a>
+                    <a href="<?php echo base_url()?>admin/cetak_panduan" class="btn btn-sm btn-warning mb-2" target="_blank"><i class="fas fa-print mr-2"></i>Panduan</a>
+                    <a href="<?php echo base_url()?>admin/cetak_religi" class="btn btn-sm btn-warning mb-2" target="_blank"><i class="fas fa-print mr-2"></i>Religi</a>
+                    <a href="<?php echo base_url()?>admin/cetak_filsafat" class="btn btn-sm btn-warning mb-2" target="_blank"><i class="fas fa-print mr-2"></i>Filsafat</a>
+                    <a href="<?php echo base_url()?>admin/cetak_kamus" class="btn btn-sm btn-warning mb-2" target="_blank"><i class="fas fa-print mr-2"></i>Kamus</a>
+                    <a href="<?php echo base_url()?>admin/cetak_psikologi" class="btn btn-sm btn-warning mb-2" target="_blank"><i class="fas fa-print mr-2"></i>Psikologi</a>
+                    <a href="<?php echo base_url()?>admin/cetak_negara" class="btn btn-sm btn-warning mb-2" target="_blank"><i class="fas fa-print mr-2"></i>Negara</a>
+                    <a href="<?php echo base_url()?>admin/cetak_ekonomi" class="btn btn-sm btn-warning mb-2" target="_blank"><i class="fas fa-print mr-2"></i>Ekonomi</a>
+                    <a href="<?php echo base_url()?>admin/cetak_pendidikan" class="btn btn-sm btn-warning mb-2" target="_blank"><i class="fas fa-print mr-2"></i>Pendidikan</a>
+                </div>
+                </div>
+            </div>
+            </div>
 
             <script type="text/javascript">
                 var url="<?php echo base_url();?>";

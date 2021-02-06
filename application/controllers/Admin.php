@@ -176,6 +176,7 @@ class Admin extends CI_Controller {
                 $data['psikologi']  = 'btn-secondary';
                 $data['negara']     = 'btn-secondary';
                 $data['ekonomi']    = 'btn-secondary';
+                $data['pendidikan'] = 'btn-secondary';
 
                 $this->load->view('template/header',$data);
                 $this->load->view('template/sidebar');
@@ -198,6 +199,7 @@ class Admin extends CI_Controller {
                 $data['psikologi']  = 'btn-secondary';
                 $data['negara']     = 'btn-secondary';
                 $data['ekonomi']    = 'btn-secondary';
+                $data['pendidikan'] = 'btn-secondary';
 
                 $this->load->view('template/header',$data);
                 $this->load->view('template/sidebar');
@@ -220,6 +222,7 @@ class Admin extends CI_Controller {
                 $data['psikologi']  = 'btn-secondary';
                 $data['negara']     = 'btn-secondary';
                 $data['ekonomi']    = 'btn-secondary';
+                $data['pendidikan'] = 'btn-secondary';
 
                 $this->load->view('template/header',$data);
                 $this->load->view('template/sidebar');
@@ -242,6 +245,7 @@ class Admin extends CI_Controller {
                 $data['psikologi']  = 'btn-secondary';
                 $data['negara']     = 'btn-secondary';
                 $data['ekonomi']    = 'btn-secondary';
+                $data['pendidikan'] = 'btn-secondary';
 
                 $this->load->view('template/header',$data);
                 $this->load->view('template/sidebar');
@@ -264,6 +268,7 @@ class Admin extends CI_Controller {
                 $data['psikologi']  = 'btn-secondary';
                 $data['negara']     = 'btn-secondary';
                 $data['ekonomi']    = 'btn-secondary';
+                $data['pendidikan'] = 'btn-secondary';
 
                 $this->load->view('template/header',$data);
                 $this->load->view('template/sidebar');
@@ -286,6 +291,7 @@ class Admin extends CI_Controller {
                 $data['psikologi']  = 'btn-secondary';
                 $data['negara']     = 'btn-secondary';
                 $data['ekonomi']    = 'btn-secondary';
+                $data['pendidikan'] = 'btn-secondary';
 
                 $this->load->view('template/header',$data);
                 $this->load->view('template/sidebar');
@@ -308,6 +314,7 @@ class Admin extends CI_Controller {
                 $data['psikologi']  = 'btn-secondary';
                 $data['negara']     = 'btn-secondary';
                 $data['ekonomi']    = 'btn-secondary';
+                $data['pendidikan'] = 'btn-secondary';
 
                 $this->load->view('template/header',$data);
                 $this->load->view('template/sidebar');
@@ -330,6 +337,7 @@ class Admin extends CI_Controller {
                 $data['psikologi']  = 'btn-secondary';
                 $data['negara']     = 'btn-secondary';
                 $data['ekonomi']    = 'btn-secondary';
+                $data['pendidikan'] = 'btn-secondary';
 
                 $this->load->view('template/header',$data);
                 $this->load->view('template/sidebar');
@@ -352,6 +360,7 @@ class Admin extends CI_Controller {
                 $data['psikologi']  = 'btn-info';
                 $data['negara']     = 'btn-secondary';
                 $data['ekonomi']    = 'btn-secondary';
+                $data['pendidikan'] = 'btn-secondary';
 
                 $this->load->view('template/header',$data);
                 $this->load->view('template/sidebar');
@@ -374,6 +383,7 @@ class Admin extends CI_Controller {
                 $data['psikologi']  = 'btn-secondary';
                 $data['negara']     = 'btn-info';
                 $data['ekonomi']    = 'btn-secondary';
+                $data['pendidikan'] = 'btn-secondary';
 
                 $this->load->view('template/header',$data);
                 $this->load->view('template/sidebar');
@@ -396,11 +406,131 @@ class Admin extends CI_Controller {
                 $data['psikologi']  = 'btn-secondary';
                 $data['negara']     = 'btn-secondary';
                 $data['ekonomi']    = 'btn-info';
+                $data['pendidikan'] = 'btn-secondary';
 
                 $this->load->view('template/header',$data);
                 $this->load->view('template/sidebar');
                 $this->load->view('buku/v_buku',$data);
                 $this->load->view('template/footer');
+        }
+
+        public function buku_pendidikan(){
+                $data['judul'] = 'Data Buku';
+                $data['buku']  = $this->db->get_where('tb_buku', array('kategori' => 'pendidikan'))->result();
+
+                $data['semua']      = 'btn-secondary';
+                $data['umum']       = 'btn-secondary';
+                $data['motivasi']   = 'btn-secondary';
+                $data['sejarah']    = 'btn-secondary';
+                $data['panduan']    = 'btn-secondary';
+                $data['religi']     = 'btn-secondary';
+                $data['filsafat']   = 'btn-secondary';
+                $data['kamus']      = 'btn-secondary';
+                $data['psikologi']  = 'btn-secondary';
+                $data['negara']     = 'btn-secondary';
+                $data['ekonomi']    = 'btn-secondary';
+                $data['pendidikan'] = 'btn-info';
+
+                $this->load->view('template/header',$data);
+                $this->load->view('template/sidebar');
+                $this->load->view('buku/v_buku',$data);
+                $this->load->view('template/footer');
+        }
+
+        public function cetak(){
+                $data['judul']    = 'Data Buku';
+                $data['kategori'] = 'Semua kategori';
+                $data['buku']     = $this->m_master->get_data('tb_buku')->result();
+
+                $this->load->view('buku/all',$data);
+        }
+
+        public function cetak_umum(){
+                $data['judul']    = 'Data Buku';
+                $data['kategori'] = 'Umum';
+                $data['buku']     = $this->db->get_where('tb_buku', array('kategori' => 'umum'))->result();
+
+                $this->load->view('buku/all',$data);
+        }
+
+        public function cetak_motivasi(){
+                $data['judul']    = 'Data Buku';
+                $data['kategori'] = 'Motivasi';
+                $data['buku']     = $this->db->get_where('tb_buku', array('kategori' => 'motivasi'))->result();
+
+                $this->load->view('buku/all',$data);
+        }
+
+        public function cetak_sejarah(){
+                $data['judul']    = 'Data Buku';
+                $data['kategori'] = 'Sejarah';
+                $data['buku']     = $this->db->get_where('tb_buku', array('kategori' => 'sejarah'))->result();
+
+                $this->load->view('buku/all',$data);
+        }
+
+        public function cetak_panduan(){
+                $data['judul']    = 'Data Buku';
+                $data['kategori'] = 'Panduan';
+                $data['buku']     = $this->db->get_where('tb_buku', array('kategori' => 'panduan'))->result();
+
+                $this->load->view('buku/all',$data);
+        }
+
+        public function cetak_religi(){
+                $data['judul']    = 'Data Buku';
+                $data['kategori'] = 'Religi';
+                $data['buku']     = $this->db->get_where('tb_buku', array('kategori' => 'religi'))->result();
+
+                $this->load->view('buku/all',$data);
+        }
+
+        public function cetak_filsafat(){
+                $data['judul']    = 'Data Buku';
+                $data['kategori'] = 'Filsafat';
+                $data['buku']     = $this->db->get_where('tb_buku', array('kategori' => 'filsafat'))->result();
+
+                $this->load->view('buku/all',$data);
+        }
+
+        public function cetak_kamus(){
+                $data['judul']    = 'Data Buku';
+                $data['kategori'] = 'Kamus';
+                $data['buku']     = $this->db->get_where('tb_buku', array('kategori' => 'kamus'))->result();
+
+                $this->load->view('buku/all',$data);
+        }
+
+        public function cetak_psikologi(){
+                $data['judul']    = 'Data Buku';
+                $data['kategori'] = 'Psikologi';
+                $data['buku']     = $this->db->get_where('tb_buku', array('kategori' => 'psikologi'))->result();
+
+                $this->load->view('buku/all',$data);
+        }
+        
+        public function cetak_negara(){
+                $data['judul']    = 'Data Buku';
+                $data['kategori'] = 'Negara';
+                $data['buku']     = $this->db->get_where('tb_buku', array('kategori' => 'negara'))->result();
+
+                $this->load->view('buku/all',$data);
+        }
+
+        public function cetak_ekonomi(){
+                $data['judul']    = 'Data Buku';
+                $data['kategori'] = 'Ekonomi';
+                $data['buku']     = $this->db->get_where('tb_buku', array('kategori' => 'ekonomi'))->result();
+
+                $this->load->view('buku/all',$data);
+        }
+        
+        public function cetak_pendidikan(){
+                $data['judul']    = 'Data Buku';
+                $data['kategori'] = 'Pendidikan';
+                $data['buku']     = $this->db->get_where('tb_buku', array('kategori' => 'pendidikan'))->result();
+
+                $this->load->view('buku/all',$data);
         }
 
         public function input_buku(){
