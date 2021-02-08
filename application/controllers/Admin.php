@@ -136,6 +136,16 @@ class Admin extends CI_Controller {
                 $data['judul']   = 'Data Anggota';
                 $this->load->view('anggota/print_anggota',$data);
         }
+
+        public function kartu($nim){
+                $data['judul'] = 'Kartu Anggota';
+                $where = array(
+                        'nim' => $nim
+                );
+                $data['kartu'] = $this->m_master->edit_data($where,'tb_anggota')->result();
+                $this->load->view('anggota/kartu',$data);
+        }
+
         public function petugas(){
                 $data['judul'] = 'Data Petugas';
                 $data['petugas'] = $this->m_master->get_data('tb_petugas')->result();

@@ -60,7 +60,7 @@
                             <td><?php echo $ang->alamat ?></td>
                             <td>
                                 <?php echo anchor('admin/edit_anggota/'.$ang->nim,'<div class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Data"><i class="fas fa-edit"></i></div>')?>
-                                <a href="" class="btn btn-sm btn-warning"><i class="fas fa-print" data-placement="top" title="Print Kartu Anggota"></i></a>
+                                <?php echo anchor('admin/kartu/'.$ang->nim,'<div class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title="Cetak Kartu Anggota"><i class="fas fa-print"></i></div>')?>
                                 <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i class="fas fa-trash" data-placement="top" title="Hapus Data" onclick="hapusdata(<?php echo $ang->nim;?>)";></i></a>
                             </td>
                         </tr>
