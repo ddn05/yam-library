@@ -40,6 +40,8 @@
                             <th>NIM</th>
                             <th>Nama</th>
                             <th>Jenis Kelamin</th>
+                            <th>No. HP</th>
+                            <th>E-Mail</th>
                             <th>Alamat</th>
                             <th>Aksi</th>
                         </tr>
@@ -53,6 +55,8 @@
                             <td><?php echo $ang->nim ?></td>
                             <td><?php echo $ang->nama ?></td>
                             <td><?php echo $ang->jk ?></td>
+                            <td><?php echo $ang->hp ?></td>
+                            <td><?php echo $ang->email ?></td>
                             <td><?php echo $ang->alamat ?></td>
                             <td>
                                 <?php echo anchor('admin/edit_anggota/'.$ang->nim,'<div class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Data"><i class="fas fa-edit"></i></div>')?>
@@ -101,6 +105,16 @@
                         </select>
                         <?php echo form_error('jk')?>
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label>No. Handphone</label>
+                        <input type="text" class="form-control" id="hp" placeholder="" name="hp">
+                        <?php echo form_error('hp')?>
+                    </div>
+                    <div class="form-group">
+                        <label>E-Mail</label>
+                        <input type="text" class="form-control" id="email" placeholder="" name="email">
+                        <?php echo form_error('email')?>
                     </div>
                     <div class="form-group">
                         <label>Alamat</label>

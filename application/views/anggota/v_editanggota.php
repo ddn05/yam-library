@@ -29,19 +29,25 @@
                                     <?php echo form_error('jk')?>
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label>No. Handphone</label>
+                                    <input type="text" class="form-control" id="hp" placeholder="" name="hp" value="<?php echo $ang->hp?>">
+                                    <?php echo form_error('hp')?>
+                                </div>
+                                <div class="form-group">
+                                    <label>E-Mail</label>
+                                    <input type="text" class="form-control" id="email" placeholder="" name="email" value="<?php echo $ang->email?>">
+                                    <?php echo form_error('email')?>
+                                </div>
                                 <div class="form-group mb-3">
                                     <label>Alamat</label>
                                     <textarea class="form-control" name="alamat" id="alamat" cols="30" rows="5"><?php echo $ang->alamat?></textarea>
                                     <?php echo form_error('alamat')?>
                                 </div>
-
                                 <a href="<?php echo base_url()?>admin/anggota" class="btn btn-secondary">Batal</a>
                                 <button type="submit" class="btn btn-primary">Simpan</button>
                             </form>
                         </div>
-
-
-                        
                         <?php } ?>
                     </div>
                 </div>

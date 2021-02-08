@@ -44,18 +44,24 @@ class Admin extends CI_Controller {
                 $nim = $this->input->post('nim');
                 $nama = $this->input->post('nama');
                 $jk = $this->input->post('jk');
+                $hp = $this->input->post('hp');
+                $email = $this->input->post('email');
                 $alamat = $this->input->post('alamat');
 
                 $data = array(
                         'nim'    => $nim,
                         'nama'   => $nama,
                         'jk'     => $jk,
+                        'hp'     => $hp,
+                        'email'  => $email,
                         'alamat' => $alamat
                 );
 
                 $this->form_validation->set_rules('nim','Nim','trim|required');
                 $this->form_validation->set_rules('nama','Nama','trim|required');
                 $this->form_validation->set_rules('jk','JK','trim|required');
+                $this->form_validation->set_rules('hp','HP','trim|required');
+                $this->form_validation->set_rules('email','EMAIL','trim|required');
                 $this->form_validation->set_rules('alamat','Alamat','trim|required');
 
                 if($this->form_validation->run() != false){
@@ -93,11 +99,15 @@ class Admin extends CI_Controller {
                 $nim = $this->input->post('nim');
                 $nama = $this->input->post('nama');
                 $jk = $this->input->post('jk');
+                $hp = $this->input->post('hp');
+                $email = $this->input->post('email');
                 $alamat = $this->input->post('alamat');
 
                 $data = array(
                         'nama'   => $nama,
                         'jk'     => $jk,
+                        'hp'     => $hp,
+                        'email'  => $email,
                         'alamat' => $alamat
                 );
 
@@ -108,6 +118,8 @@ class Admin extends CI_Controller {
                 $this->form_validation->set_rules('nim','Nim','trim|required');
                 $this->form_validation->set_rules('nama','Nama','trim|required');
                 $this->form_validation->set_rules('jk','JK','trim|required');
+                $this->form_validation->set_rules('hp','HP','trim|required');
+                $this->form_validation->set_rules('email','EMAIL','trim|required');
                 $this->form_validation->set_rules('alamat','Alamat','trim|required');
 
                 if($this->form_validation->run() != false){
@@ -119,6 +131,11 @@ class Admin extends CI_Controller {
                 }
         }
 
+        public function cetak_anggota(){
+                $data['anggota'] = $this->m_master->get_data('tb_anggota')->result();
+                $data['judul']   = 'Data Anggota';
+                $this->load->view('anggota/print_anggota',$data);
+        }
         public function petugas(){
                 $data['judul'] = 'Data Petugas';
                 $data['petugas'] = $this->m_master->get_data('tb_petugas')->result();
