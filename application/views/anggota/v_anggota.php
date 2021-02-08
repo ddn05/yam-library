@@ -29,13 +29,13 @@
 
                 <div class="card-header py-3">
                     <a href="" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#anggota"><i class="fas fa-plus mr-2"></i>Tambah Anggota</a>
-                    <a href="" class="btn btn-sm btn-warning"><i class="fas fa-print mr-2"></i>Cetak Laporan</a>
+                    <a href="<?php echo base_url()?>admin/cetak_anggota" target="_blank" class="btn btn-sm btn-warning"><i class="fas fa-print mr-2"></i>Cetak Laporan</a>
                 </div>
                 <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
-                        <tr>
+                        <tr class="text-center">
                             <th>No.</th>
                             <th>NIM</th>
                             <th>Nama</th>

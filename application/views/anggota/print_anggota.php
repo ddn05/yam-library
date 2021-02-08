@@ -19,17 +19,17 @@
     <body>
         <img src="<?php echo base_url()?>assets/img/header.jpg" alt="">
         <hr>
-        <h3 class="text-center mb-2">Data Anggota</h3>
+        <h3 class="text-center mb-4">Data Anggota</h3>
         <table class="table table-bordered">
         <thead>
             <tr class="text-center">
-            <th scope="col">No.</th>
-            <th scope="col">NIM</th>
-            <th scope="col">Nama</th>
-            <th scope="col">Jenis Kelamin</th>
-            <th scope="col">No. HP</th>
-            <th scope="col">E-Mail</th>
-            <th scope="col">Alamat</th>
+                <th scope="col">No.</th>
+                <th scope="col">NIM</th>
+                <th scope="col">Nama</th>
+                <th scope="col">Jenis Kelamin</th>
+                <th scope="col">No. HP</th>
+                <th scope="col">E-Mail</th>
+                <th scope="col">Alamat</th>
             </tr>
         </thead>
         <tbody>
