@@ -13,7 +13,7 @@ class Admin extends CI_Controller {
 	{
                 $data['judul'] = 'Dashboard Admin';
 
-                $data['ang']        = $this->db->get('tb_anggota')->num_rows();
+                $data['ang']            = $this->db->get('tb_anggota')->num_rows();
                 $data['buku']           = $this->db->get('tb_buku')->num_rows();
                 $data['borrow']         = $this->db->query("select * from tb_transaksi where tgl_dikembalikan is NULL")->num_rows();
                 $data['kembali']        = $this->db->query("select * from tb_transaksi where tgl_dikembalikan is NOT NULL")->num_rows();
@@ -31,7 +31,7 @@ class Admin extends CI_Controller {
         }
         
         public function anggota(){
-                $data['judul'] = 'Data Buku';
+                $data['judul'] = 'Data Anggota';
                 $data['anggota'] = $this->m_master->get_data('tb_anggota')->result();
 
                 $this->load->view('template/header',$data);

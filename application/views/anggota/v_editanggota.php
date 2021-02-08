@@ -31,7 +31,7 @@
                                 </div>
                                 <div class="form-group mb-3">
                                     <label>Alamat</label>
-                                    <input type="text" class="form-control" id="alamat" placeholder="" name="alamat" value="<?php echo $ang->alamat?>">
+                                    <textarea class="form-control" name="alamat" id="alamat" cols="30" rows="5"><?php echo $ang->alamat?></textarea>
                                     <?php echo form_error('alamat')?>
                                 </div>
 

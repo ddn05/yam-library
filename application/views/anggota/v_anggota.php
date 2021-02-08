@@ -104,7 +104,7 @@
                     </div>
                     <div class="form-group">
                         <label>Alamat</label>
-                        <input type="text" class="form-control" id="alamat" placeholder="" name="alamat">
+                        <textarea class="form-control" name="alamat" id="alamat" cols="30" rows="5"></textarea>
                         <?php echo form_error('alamat')?>
                     </div>
                 </div>
