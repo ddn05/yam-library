@@ -20,6 +20,7 @@
         <img src="<?php echo base_url()?>assets/img/header.jpg" alt="">
         <hr>
         <h3 class="text-center mb-4">Data Peminjaman</h3>
+        <p class="mb-2">Filter : <?php echo $filter?></p>
         <table class="table table-bordered">
         <thead>
             <tr class="text-center">

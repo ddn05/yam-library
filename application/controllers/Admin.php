@@ -836,6 +836,12 @@ class Admin extends CI_Controller {
         public function lap_peminjaman(){
                 $data['judul']   = 'Laporan Peminjaman';
                 $data['pinjam'] = $this->db->query("select * from tb_transaksi,tb_anggota,tb_buku where nim_anggota=nim and kode_buku=kode and tgl_dikembalikan is NULL")->result();
+                
+                $data['keyword'] = $this->input->post('keyword');
+                $data['dari'] = $this->input->post('dari');
+                $data['sampai'] = $this->input->post('sampai');
+
+                $data['link']    = 'cetak_lappem';
 
                 $this->load->view('template/header',$data);
                 $this->load->view('template/sidebar');
@@ -882,13 +888,18 @@ class Admin extends CI_Controller {
                 redirect('admin/lap_peminjaman?pesan=berhasil');
         }
 
-        public function filter_peminjaman(){
-                $data['judul']   = 'Filter Laporan Peminjaman';
+        public function filter_peminjaman_nim(){
+                $data['judul']   = 'Laporan Peminjaman';
 
                 $keyword = $this->input->post('keyword');
 
-                $this->form_validation->set_rules('keyword','Keyword','trim|required');
+                $data['keyword'] = $this->input->post('keyword');
+                $data['dari'] = $this->input->post('dari');
+                $data['sampai'] = $this->input->post('sampai');
+                $data['link']    = 'cetak_lappem_nim';
 
+                $this->form_validation->set_rules('keyword','Keyword','trim|required');
+                
                 if($this->form_validation->run() != false){
 
                         $this->db->select('*');
@@ -900,9 +911,40 @@ class Admin extends CI_Controller {
                         
                         $data['pinjam'] = $this->db->get()->result();
 
+                        $data['keyword'] = $keyword;
+
                         $this->load->view('template/header',$data);
                         $this->load->view('template/sidebar');
-                        $this->load->view('laporan/v_laptransaksi_filter',$data);
+                        $this->load->view('laporan/v_laptransaksi',$data);
+                        $this->load->view('template/footer');
+                }
+
+                else{
+                        redirect('admin/lap_peminjaman');
+                }
+        }
+
+        public function filter_peminjaman_tgl(){
+                $data['judul']   = 'Laporan Peminjaman';
+                
+                $dari   = $this->input->post('dari');
+                $sampai = $this->input->post('sampai');
+
+                $data['keyword'] = $this->input->post('keyword');
+                $data['dari']    = $this->input->post('dari');
+                $data['sampai']  = $this->input->post('sampai');
+                $data['link']    = 'cetak_lappem_tgl';
+
+                $this->form_validation->set_rules('dari','dari','trim|required');
+                $this->form_validation->set_rules('sampai','sampai','trim|required');
+
+                if($this->form_validation->run() != false){
+
+                        $data['pinjam'] = $this->db->query("select * from tb_transaksi,tb_anggota,tb_buku where nim_anggota=nim and kode_buku=kode and date(tgl_dikembalikan) is NULL and date(tgl_kembali)>='$dari' and date(tgl_kembali)<='$sampai'")->result();
+
+                        $this->load->view('template/header',$data);
+                        $this->load->view('template/sidebar');
+                        $this->load->view('laporan/v_laptransaksi',$data);
                         $this->load->view('template/footer');
                 }
 
@@ -915,15 +957,31 @@ class Admin extends CI_Controller {
                 $data['judul']    = 'Data Peminjaman';
                 $data['peminjaman'] = $this->db->query("select * from tb_transaksi,tb_anggota,tb_buku where nim_anggota=nim and kode_buku=kode and tgl_dikembalikan is NULL")->result();
 
+                $data['filter'] = 'Semua Data';
+
                 $this->load->view('laporan/print_laporan',$data);
         }
 
-        public function cetak_lappem_filter(){
+        public function cetak_lappem_nim($key){
                 $data['judul']    = 'Data Peminjaman';
 
                 $keyword = $this->input->post('keyword');
+                $data['filter']  = 'Berdasarkan NIM ('.$key.')';
 
-                $data['peminjaman'] = $this->db->query("select * from tb_transaksi,tb_anggota,tb_buku where nim_anggota=nim and kode_buku=kode and tgl_dikembalikan is NULL and nim_anggota='$keyword'")->result();
+                $data['peminjaman'] = $this->db->query("select * from tb_transaksi,tb_anggota,tb_buku where nim_anggota=nim and kode_buku=kode and tgl_dikembalikan is NULL and nim_anggota='$key'")->result();
+                
+                $this->load->view('laporan/print_laporan',$data);
+        }
+
+        public function cetak_lappem_tgl($dari,$sampai){
+                $data['judul']    = 'Data Peminjaman';
+
+                $a = date("d-m-Y", strtotime($dari));
+                $b = date("d-m-Y", strtotime($sampai));
+
+                $data['filter']   = 'Berdasarkan Tanggal ('.$a.' - '.$b.')';
+
+                $data['peminjaman'] = $this->db->query("select * from tb_transaksi,tb_anggota,tb_buku where nim_anggota=nim and kode_buku=kode and date(tgl_dikembalikan) is NULL and date(tgl_kembali)>='$dari' and date(tgl_kembali)<='$sampai'")->result();
                 
                 $this->load->view('laporan/print_laporan',$data);
         }

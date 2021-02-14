@@ -4,17 +4,36 @@
             <!-- Page Heading -->
             <h1 class="h3 mb-4 text-gray-800">Data Peminjaman</h1>
 
-            <div class="card shadow mb-4 p-4 col-md-3">
-                <form action="<?php echo base_url().'admin/filter_peminjaman'?>" method="post">
-                <h1 class="h5 mb-4 text-gray-800"><strong>Filter berdasarkan NIM Peminjam</strong> </h1>
+            <div class="row">
+                <div class="card shadow mb-4 p-4 col-md-3">
+                    <form action="<?php echo base_url().'admin/filter_peminjaman_nim'?>" method="post">
+                    <h1 class="h5 mb-4 text-gray-800"><strong>Filter berdasarkan NIM Peminjam</strong> </h1>
 
-                <div class="form-group">
-                    <input type="text" class="form-control" id="keyword" placeholder="Masukan NIM Peminjam" name="keyword">
-                    <?php echo form_error('ulangfilter')?>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="keyword" placeholder="Masukan NIM Peminjam" name="keyword" value="<?php echo $keyword?>">
+                        <?php echo form_error('ulangfilter')?>
+                    </div>
+
+                        <button class="btn btn-primary btn-sm" type="submit">Filter</button>
+                    </form>
                 </div>
 
-                    <button class="btn btn-primary btn-sm" type="submit">Filter</button>
-                </form>
+                <div class="card shadow mb-4 p-4 col-md-3 ml-4">
+                    <form action="<?php echo base_url().'admin/filter_peminjaman_tgl'?>" method="post">
+                    <h1 class="h5 mb-4 text-gray-800"><strong>Filter berdasarkan Tanggal</strong> </h1>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <input type="date" class="form-control" id="dari" placeholder="" name="dari" value="<?php echo $dari?>">
+                            <?php echo form_error('dari')?>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <input type="date" class="form-control" id="sampai" placeholder="" name="sampai" value="<?php echo $sampai?>">
+                            <?php echo form_error('sampai')?>
+                        </div>
+                    </div>
+                        <button class="btn btn-primary btn-sm" type="submit">Filter</button>
+                    </form>
+                </div>
             </div>
 
             <!-- DataTales Example -->
@@ -27,9 +46,23 @@
                         }
                     }
                 ?>
-
+                <?php
+                    $key = $keyword;
+                    $dari = $dari;
+                    $sampai = $sampai
+                ?>
                 <div class="card-header py-3">
-                    <a href="<?php echo base_url('admin/cetak_lappem')?>" class="btn btn-sm btn-warning" target="_blank"><i class="fas fa-print mr-2"></i>Cetak Laporan</a>
+                    <a href="<?php
+                    if($key == NULL && $dari == NULL && $sampai == NULL){
+                        echo base_url('admin/'.$link);
+                    }
+                    else if($dari == NULL && $sampai == NULL){
+                        echo base_url('admin/'.$link.'/'.$key);
+                    }
+                    else if($key == NULL){
+                        echo base_url('admin/'.$link.'/'.$dari.'/'.$sampai);
+                    }
+                    ?>" class="btn btn-sm btn-warning" target="_blank"><i class="fas fa-print mr-2"></i>Cetak Laporan</a>
                 </div>
                 <div class="card-body">
                 <div class="table-responsive">
