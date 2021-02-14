@@ -43,7 +43,7 @@
 
                 <div class="card-header py-3">
                     <a href="" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#buku"><i class="fas fa-plus mr-2"></i>Tambah Buku</a>
-                    <a href="" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#cet_laporan"><i class="fas fa-print mr-2"></i>Cetak Laporan</a>
+                    <a href="<?php echo base_url('admin/'.$key_cetak)?>" class="btn btn-sm btn-warning" target="_blank"><i class="fas fa-print mr-2"></i>Cetak Laporan</a>
                 </div>
                 <div class="card-body">
                 <div class="table-responsive">

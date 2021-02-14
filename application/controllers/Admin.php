@@ -212,6 +212,8 @@ class Admin extends CI_Controller {
                 $data['ekonomi']    = 'btn-secondary';
                 $data['pendidikan'] = 'btn-secondary';
 
+                $data['key_cetak'] = 'cetak';
+
                 $this->load->view('template/header',$data);
                 $this->load->view('template/sidebar');
                 $this->load->view('buku/v_buku',$data);
@@ -234,6 +236,8 @@ class Admin extends CI_Controller {
                 $data['negara']     = 'btn-secondary';
                 $data['ekonomi']    = 'btn-secondary';
                 $data['pendidikan'] = 'btn-secondary';
+
+                $data['key_cetak'] = 'cetak_umum';
 
                 $this->load->view('template/header',$data);
                 $this->load->view('template/sidebar');
@@ -258,6 +262,8 @@ class Admin extends CI_Controller {
                 $data['ekonomi']    = 'btn-secondary';
                 $data['pendidikan'] = 'btn-secondary';
 
+                $data['key_cetak'] = 'cetak_motivasi';
+
                 $this->load->view('template/header',$data);
                 $this->load->view('template/sidebar');
                 $this->load->view('buku/v_buku',$data);
@@ -280,6 +286,8 @@ class Admin extends CI_Controller {
                 $data['negara']     = 'btn-secondary';
                 $data['ekonomi']    = 'btn-secondary';
                 $data['pendidikan'] = 'btn-secondary';
+
+                $data['key_cetak'] = 'cetak_sejarah';
 
                 $this->load->view('template/header',$data);
                 $this->load->view('template/sidebar');
@@ -304,6 +312,8 @@ class Admin extends CI_Controller {
                 $data['ekonomi']    = 'btn-secondary';
                 $data['pendidikan'] = 'btn-secondary';
 
+                $data['key_cetak'] = 'cetak_panduan';
+
                 $this->load->view('template/header',$data);
                 $this->load->view('template/sidebar');
                 $this->load->view('buku/v_buku',$data);
@@ -326,6 +336,8 @@ class Admin extends CI_Controller {
                 $data['negara']     = 'btn-secondary';
                 $data['ekonomi']    = 'btn-secondary';
                 $data['pendidikan'] = 'btn-secondary';
+                
+                $data['key_cetak'] = 'cetak_religi';
 
                 $this->load->view('template/header',$data);
                 $this->load->view('template/sidebar');
@@ -350,6 +362,8 @@ class Admin extends CI_Controller {
                 $data['ekonomi']    = 'btn-secondary';
                 $data['pendidikan'] = 'btn-secondary';
 
+                $data['key_cetak'] = 'cetak_filsafat';
+
                 $this->load->view('template/header',$data);
                 $this->load->view('template/sidebar');
                 $this->load->view('buku/v_buku',$data);
@@ -372,6 +386,8 @@ class Admin extends CI_Controller {
                 $data['negara']     = 'btn-secondary';
                 $data['ekonomi']    = 'btn-secondary';
                 $data['pendidikan'] = 'btn-secondary';
+
+                $data['key_cetak'] = 'cetak_kamus';
 
                 $this->load->view('template/header',$data);
                 $this->load->view('template/sidebar');
@@ -396,6 +412,8 @@ class Admin extends CI_Controller {
                 $data['ekonomi']    = 'btn-secondary';
                 $data['pendidikan'] = 'btn-secondary';
 
+                $data['key_cetak'] = 'cetak_psikologi';
+
                 $this->load->view('template/header',$data);
                 $this->load->view('template/sidebar');
                 $this->load->view('buku/v_buku',$data);
@@ -418,6 +436,8 @@ class Admin extends CI_Controller {
                 $data['negara']     = 'btn-info';
                 $data['ekonomi']    = 'btn-secondary';
                 $data['pendidikan'] = 'btn-secondary';
+
+                $data['key_cetak'] = 'cetak_negaras';
 
                 $this->load->view('template/header',$data);
                 $this->load->view('template/sidebar');
@@ -442,6 +462,8 @@ class Admin extends CI_Controller {
                 $data['ekonomi']    = 'btn-info';
                 $data['pendidikan'] = 'btn-secondary';
 
+                $data['key_cetak'] = 'cetak_ekonomi';
+
                 $this->load->view('template/header',$data);
                 $this->load->view('template/sidebar');
                 $this->load->view('buku/v_buku',$data);
@@ -464,6 +486,8 @@ class Admin extends CI_Controller {
                 $data['negara']     = 'btn-secondary';
                 $data['ekonomi']    = 'btn-secondary';
                 $data['pendidikan'] = 'btn-info';
+
+                $data['key_cetak'] = 'cetak_pendidikan';
 
                 $this->load->view('template/header',$data);
                 $this->load->view('template/sidebar');
@@ -885,6 +909,25 @@ class Admin extends CI_Controller {
                 else{
                         redirect('admin/lap_peminjaman');
                 }
+        }
+
+        public function cetak_lappem(){
+                $data['judul']    = 'Data Peminjaman';
+                $data['kategori'] = 'Semua kategori';
+                $data['peminjaman'] = $this->db->query("select * from tb_transaksi,tb_anggota,tb_buku where nim_anggota=nim and kode_buku=kode and tgl_dikembalikan is NULL")->result();
+
+                $this->load->view('laporan/print_laporan',$data);
+        }
+
+        public function cetak_lappem_filter(){
+                $data['judul']    = 'Data Peminjaman';
+                $data['kategori'] = 'Semua kategori';
+
+                $keyword = $this->input->post('keyword');
+
+                $data['peminjaman'] = $this->db->query("select * from tb_transaksi,tb_anggota,tb_buku where nim_anggota=nim and kode_buku=kode and tgl_dikembalikan is NULL and nim_anggota='$keyword'")->result();
+                
+                $this->load->view('laporan/print_laporan',$data);
         }
 
         public function pengembalian(){

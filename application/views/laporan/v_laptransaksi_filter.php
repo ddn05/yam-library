@@ -29,7 +29,7 @@
                 ?>
 
                 <div class="card-header py-3">
-                    <a href="" class="btn btn-sm btn-warning"><i class="fas fa-print mr-2"></i>Cetak Laporan</a>
+                    <a href="<?php echo base_url('admin/cetak_lappem_filter')?>" class="btn btn-sm btn-warning" target="_blank"><i class="fas fa-print mr-2"></i>Cetak Laporan</a>
                 </div>
                 <div class="card-body">
                 <div class="table-responsive">
