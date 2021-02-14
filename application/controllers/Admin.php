@@ -913,7 +913,6 @@ class Admin extends CI_Controller {
 
         public function cetak_lappem(){
                 $data['judul']    = 'Data Peminjaman';
-                $data['kategori'] = 'Semua kategori';
                 $data['peminjaman'] = $this->db->query("select * from tb_transaksi,tb_anggota,tb_buku where nim_anggota=nim and kode_buku=kode and tgl_dikembalikan is NULL")->result();
 
                 $this->load->view('laporan/print_laporan',$data);
@@ -921,7 +920,6 @@ class Admin extends CI_Controller {
 
         public function cetak_lappem_filter(){
                 $data['judul']    = 'Data Peminjaman';
-                $data['kategori'] = 'Semua kategori';
 
                 $keyword = $this->input->post('keyword');
 
@@ -1028,6 +1026,15 @@ class Admin extends CI_Controller {
                 $this->load->view('template/footer');
         }
 
+        public function cetak_lappen(){
+                $data['judul']    = 'Data Pengembalian';
+                $data['filter']   = 'Semua data';
+
+                $data['pengembalian'] = $this->db->query("select * from tb_transaksi,tb_anggota,tb_buku where nim_anggota=nim and kode_buku=kode and tgl_dikembalikan is NOT NULL")->result();
+
+                $this->load->view('laporan/print_pengembalian',$data);
+        }
+
         public function filter_pengembalian_nim(){
                 $data['judul']   = 'Filter Laporan Pengembalian';
 
@@ -1057,6 +1064,22 @@ class Admin extends CI_Controller {
                 }
         }
 
+        public function cetak_lappen_nim($keyword){
+                $data['judul']    = 'Data Pengembalian';
+                $data['filter']   = 'Berdasarkan NIM ('.$keyword.')';
+
+                $this->db->select('*');
+                $this->db->from('tb_transaksi');
+                $this->db->join('tb_anggota','tb_anggota.nim = tb_transaksi.nim_anggota');
+                $this->db->join('tb_buku','tb_buku.kode = tb_transaksi.kode_buku');
+                $this->db->where('tb_transaksi.tgl_dikembalikan is NOT NULL');
+                $this->db->where('tb_anggota.nim',$keyword);
+                        
+                $data['pengembalian'] = $this->db->get()->result();
+
+                $this->load->view('laporan/print_pengembalian',$data);
+        }
+
         public function filter_pengembalian_tgl(){
                 $data['judul']   = 'Filter Laporan Pengembalian';
 
@@ -1079,6 +1102,19 @@ class Admin extends CI_Controller {
                 else{
                         redirect('admin/lap_pengembalian');
                 }
+        }
+
+        public function cetak_lappen_tgl($dari,$sampai){
+                $data['judul']    = 'Data Pengembalian';
+                
+                $a = date("d-m-Y", strtotime($dari));
+                $b = date("d-m-Y", strtotime($sampai));
+
+                $data['filter']   = 'Berdasarkan Tanggal ('.$a.' - '.$b.')';
+
+                $data['pengembalian'] = $this->db->query("select * from tb_transaksi,tb_anggota,tb_buku where nim_anggota=nim and kode_buku=kode and date(tgl_dikembalikan) is NOT NULL and date(tgl_dikembalikan)>='$dari' and date(tgl_dikembalikan)<='$sampai'")->result();
+
+                $this->load->view('laporan/print_pengembalian',$data);
         }
 
         public function perpanjangan(){
