@@ -146,6 +146,13 @@ class Admin extends CI_Controller {
                 $this->load->view('anggota/kartu',$data);
         }
 
+        public function all_kartu(){
+                $data['judul'] = 'Cetak Kartu';
+                $data['kartu'] = $this->m_master->get_data('tb_anggota')->result();
+
+                $this->load->view('anggota/all_kartu',$data);
+        }
+
         public function petugas(){
                 $data['judul'] = 'Data Petugas';
                 $data['petugas'] = $this->m_master->get_data('tb_petugas')->result();
@@ -677,7 +684,20 @@ class Admin extends CI_Controller {
                 }
         }
 
-        public function peminjaman(){
+        public function detail_buku($kode){
+                $data['judul'] = 'Detail Buku';
+                $where = array(
+                        'kode' => $kode
+                );
+                $data['buku'] = $this->m_master->edit_data($where,'tb_buku')->result();
+
+                $this->load->view('template/header',$data);
+                $this->load->view('template/sidebar');
+                $this->load->view('buku/v_detbuku',$data);
+                $this->load->view('template/footer');
+        }
+
+        public function peminjaman2(){
                 $data['judul']   = 'Peminjaman';
                 $data['anggota'] = $this->m_master->get_data('tb_anggota')->result();
                 $data['buku']    = $this->m_master->get_data('tb_buku')->result();
@@ -688,7 +708,50 @@ class Admin extends CI_Controller {
                 $this->load->view('template/footer');
         }
 
-        public function act_peminjaman(){
+        public function peminjaman(){
+                $data['judul']   = 'Peminjaman';
+                $data['anggota'] = $this->m_master->get_data('tb_anggota')->result();
+                $data['buku']    = $this->m_master->get_data('tb_buku')->result();
+
+                $this->load->view('template/header',$data);
+                $this->load->view('template/sidebar');
+                $this->load->view('transaksi/v_peminjaman',$data);
+                $this->load->view('template/footer');                
+        }
+
+        public function checkout(){
+                $data['judul'] = 'Peminjaman';
+
+                $key_anggota   = $this->input->post('key_anggota');
+                $key_buku      = $this->input->post('key_buku');
+                
+                $data['anggota'] = $this->m_master->get_data('tb_anggota')->result();
+                $data['buku']    = $this->m_master->get_data('tb_buku')->result();
+                
+                $data['key_anggota'] = $key_anggota;
+                $data['key_buku']    = $key_buku;
+
+                $cek_anggota = $this->db->get_where('tb_anggota', array('nim' => $key_anggota))->result();
+                $cek_buku    = $this->db->get_where('tb_buku', array('kode' => $key_buku))->result();
+
+                $data['anggota_result'] = $this->db->get_where('tb_anggota',array('nim' => $key_anggota))->result();
+                $data['buku_result']    = $this->db->get_where('tb_buku',array('kode' => $key_buku))->result();
+
+                $this->form_validation->set_rules('key_anggota','Key_anggota','trim|required');
+                $this->form_validation->set_rules('key_buku','Key_buku','trim|required');
+                
+                if($cek_anggota != false && $cek_buku != false){
+                        $this->load->view('template/header',$data);
+                        $this->load->view('template/sidebar');
+                        $this->load->view('transaksi/v_checkout',$data);
+                        $this->load->view('template/footer');
+                }
+                else{
+                        redirect('admin/peminjaman?pesan=gagal');
+                }
+        }
+
+        public function act_checkout(){
                 $nim_anggota    = $this->input->post('nim_anggota');
                 $kode_buku      = $this->input->post('kode_buku');
                 $tgl_pinjam     = $this->input->post('tgl_pinjam');
@@ -740,7 +803,7 @@ class Admin extends CI_Controller {
                         redirect('admin/peminjaman?pesan=berhasil');
                 }
                 else{
-                        redirect('admin/peminjaman?pesan=gagal');
+                        redirect('admin/peminjaman?pesan=berhasil');
                 }
                 
 

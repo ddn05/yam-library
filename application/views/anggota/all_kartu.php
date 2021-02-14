@@ -10,45 +10,36 @@
     
     <style type="text/css" media="print">
         @page { 
-            size: 29.7cm 21cm;
-            margin: 1cm 2.5cm 2.5cm 2.5cm}
+            size: 21cm 29.7cm;
+            margin: 0.5cm}
     </style>
 
     <title><?php echo $judul?></title>
+
     </head>
     <body>
-        <img src="<?php echo base_url()?>assets/img/header.jpg" alt="">
-        <hr>
-        <h3 class="text-center mb-4">Data Anggota</h3>
-        <table class="table table-bordered">
-        <thead>
-            <tr class="text-center">
-                <th scope="col">No.</th>
-                <th scope="col">NIM</th>
-                <th scope="col">Nama</th>
-                <th scope="col">Jenis Kelamin</th>
-                <th scope="col">No. HP</th>
-                <th scope="col">E-Mail</th>
-                <th scope="col">Alamat</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-                $no = 1;
-                foreach($anggota as $ang){
-            ?>
-                <tr>
-                    <td class="text-center"><?php echo $no++ ?>.</td>
-                    <td class="text-center"><?php echo $ang->nim ?></td>
-                    <td><?php echo $ang->nama ?></td>
-                    <td class="text-center"><?php echo $ang->jk ?></td>
-                    <td><?php echo $ang->email ?></td>
-                    <td><?php echo $ang->hp ?></td>
-                    <td><?php echo $ang->alamat ?></td>
-                </tr>
-            <?php } ?>
-        </tbody>
-    </table>
+    <div class="row">
+    <?php foreach($kartu as $kar) {?>
+        <div class="card p-4 col-md-5 m-1" style="width: 31rem">
+            <img class="img-card-top img-fluid" src="<?php echo base_url()?>assets/img/header.jpg" alt="">
+            <div class="card-body">
+                <hr class="m-0 p-0 mb-2">
+                <h5 class="mb-4 text-center">Kartu Anggota</h5>
+                
+                <table class="mb-2">
+                    <tr><th>NIM</th><td>: <?php echo $kar->nim?></td></tr>
+                    <tr><th>Nama</th><td>: <?php echo $kar->nama?></td></tr>
+                    <tr><th>Jenis Kelamin</th><td>: <?php echo $kar->jk?></td></tr>
+                    <tr><th>E-Mail</th><td>: <?php echo $kar->email?></td></tr>
+                    <tr><th>Alamat</th><td>: <?php echo $kar->alamat?></td></tr>
+                </table>
+            </div>
+            <img src="<?php echo base_url()?>assets/img/bc.png" alt="">
+        </div>
+        <?php } ?>
+    </div>
+    
+        
 
     <!-- Optional JavaScript; choose one of the two! -->
 
@@ -65,7 +56,6 @@
 
     <script>
         window.print();
-        window.open('_blank');
     </script>
   </body>
 </html>

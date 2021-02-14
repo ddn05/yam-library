@@ -18,7 +18,7 @@
 
     </head>
     <body>
-        <div class="card p-4 col-md-5" style="width: 35rem">
+        <div class="card p-4 col-md-5" style="width: 31rem">
             <img class="img-card-top img-fluid" src="<?php echo base_url()?>assets/img/header.jpg" alt="">
             <div class="card-body">
                 <hr class="m-0 p-0 mb-2">

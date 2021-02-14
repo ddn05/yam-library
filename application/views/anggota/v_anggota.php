@@ -30,6 +30,7 @@
                 <div class="card-header py-3">
                     <a href="" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#anggota"><i class="fas fa-plus mr-2"></i>Tambah Anggota</a>
                     <a href="<?php echo base_url()?>admin/cetak_anggota" target="_blank" class="btn btn-sm btn-warning"><i class="fas fa-print mr-2"></i>Cetak Laporan</a>
+                    <a href="<?php echo base_url()?>admin/all_kartu" target="_blank" class="btn btn-sm btn-warning"><i class="fas fa-print mr-2"></i>Cetak Kartu Anggota</a>
                 </div>
                 <div class="card-body">
                 <div class="table-responsive">
@@ -60,7 +61,7 @@
                             <td><?php echo $ang->alamat ?></td>
                             <td>
                                 <?php echo anchor('admin/edit_anggota/'.$ang->nim,'<div class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Data"><i class="fas fa-edit"></i></div>')?>
-                                <?php echo anchor('admin/kartu/'.$ang->nim,'<div class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title="Cetak Kartu Anggota"><i class="fas fa-print"></i></div>')?>
+                                <a href="<?php echo base_url('admin/kartu/'.$ang->nim)?>" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="Cetak Kartu Anggota" target="_blank"><i class="fas fa-print"></i></a>
                                 <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i class="fas fa-trash" data-placement="top" title="Hapus Data" onclick="hapusdata(<?php echo $ang->nim;?>)";></i></a>
                             </td>
                         </tr>

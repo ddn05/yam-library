@@ -73,6 +73,7 @@
                             <td><?php echo $buk->kategori ?></td>
                             <td><?php echo $buk->stok ?></td>
                             <td>
+                                <?php echo anchor('admin/detail_buku/'.$buk->kode,'<div class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Detail Buku"><i class="fas fa-search"></i></div>')?>
                                 <?php echo anchor('admin/edit_buku/'.$buk->kode,'<div class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Data"><i class="fas fa-edit"></i></div>')?>
                                 <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i class="fas fa-trash" data-placement="top" title="Hapus Data" onclick="hapusdata(<?php echo $buk->kode;?>)";></i></a>
                             </td>
