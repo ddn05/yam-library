@@ -1248,6 +1248,13 @@ class Admin extends CI_Controller {
                 $this->load->view('template/footer');
         }
 
+        public function cetak_melebihi(){
+                $data['judul']   = 'Laporan Peminjaman Melebihi Deadline';
+                $date = date("Y-m-d");
+                $data['pinjam'] = $this->db->query("select * from tb_transaksi,tb_anggota,tb_buku where nim_anggota=nim and kode_buku=kode and tgl_kembali < '$date' and tgl_dikembalikan is NULL")->result();
+                $this->load->view('laporan/print_melebihi',$data);
+        }
+
         public function progress(){
                 $data['judul']   = 'Cek Progress';
                 
