@@ -47,6 +47,7 @@ class Admin extends CI_Controller {
                 $hp = $this->input->post('hp');
                 $email = $this->input->post('email');
                 $alamat = $this->input->post('alamat');
+                $password = $this->input->post('password');
 
                 $data = array(
                         'nim'    => $nim,
@@ -54,7 +55,8 @@ class Admin extends CI_Controller {
                         'jk'     => $jk,
                         'hp'     => $hp,
                         'email'  => $email,
-                        'alamat' => $alamat
+                        'alamat' => $alamat,
+                        'password' => md5($password)
                 );
 
                 $this->form_validation->set_rules('nim','Nim','trim|required');
@@ -63,6 +65,7 @@ class Admin extends CI_Controller {
                 $this->form_validation->set_rules('hp','HP','trim|required');
                 $this->form_validation->set_rules('email','EMAIL','trim|required');
                 $this->form_validation->set_rules('alamat','Alamat','trim|required');
+                $this->form_validation->set_rules('password','Password','trim|required');
 
                 if($this->form_validation->run() != false){
                         $this->m_master->insert_data($data,'tb_anggota');
@@ -102,13 +105,15 @@ class Admin extends CI_Controller {
                 $hp = $this->input->post('hp');
                 $email = $this->input->post('email');
                 $alamat = $this->input->post('alamat');
+                $password = $this->input->post('password');
 
                 $data = array(
                         'nama'   => $nama,
                         'jk'     => $jk,
                         'hp'     => $hp,
                         'email'  => $email,
-                        'alamat' => $alamat
+                        'alamat' => $alamat,
+                        'password' => md5($password)
                 );
 
                 $where = array(
@@ -121,6 +126,7 @@ class Admin extends CI_Controller {
                 $this->form_validation->set_rules('hp','HP','trim|required');
                 $this->form_validation->set_rules('email','EMAIL','trim|required');
                 $this->form_validation->set_rules('alamat','Alamat','trim|required');
+                $this->form_validation->set_rules('password','Password','trim|required');
 
                 if($this->form_validation->run() != false){
                         $this->m_master->update_data($where,$data,'tb_anggota');

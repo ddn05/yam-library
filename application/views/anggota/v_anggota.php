@@ -114,13 +114,18 @@
                     </div>
                     <div class="form-group">
                         <label>E-Mail</label>
-                        <input type="text" class="form-control" id="email" placeholder="" name="email">
+                        <input type="email" class="form-control" id="email" placeholder="" name="email">
                         <?php echo form_error('email')?>
                     </div>
                     <div class="form-group">
                         <label>Alamat</label>
                         <textarea class="form-control" name="alamat" id="alamat" cols="30" rows="5"></textarea>
                         <?php echo form_error('alamat')?>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="" name="password" value="abs1234">
+                        <?php echo form_error('password')?>
                     </div>
                 </div>
                 <div class="modal-footer">

@@ -44,6 +44,12 @@
                                     <textarea class="form-control" name="alamat" id="alamat" cols="30" rows="5"><?php echo $ang->alamat?></textarea>
                                     <?php echo form_error('alamat')?>
                                 </div>
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input type="password" class="form-control" id="password" placeholder="" name="password" value="<?php echo $ang->password?>">
+                                    <?php echo form_error('password')?>
+                                </div>
+
                                 <a href="<?php echo base_url()?>admin/anggota" class="btn btn-secondary">Batal</a>
                                 <button type="submit" class="btn btn-primary">Simpan</button>
                             </form>
