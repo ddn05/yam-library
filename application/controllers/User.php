@@ -6,49 +6,21 @@ class User extends CI_Controller {
 		parent::__construct();
 		// cek login
 		if($this->session->userdata('status') != "login"){
-                redirect('user?pesan=belumlogin');
+                        redirect('auth_user?pesan=belumlogin');
 		}
-    }
-
+	}
     public function index(){
-        $this->load->view('user/v_login');
-    }
+        $nim = $this->session->userdata('nim');
+        $date = date("Y-m-d");
 
-    public function login(){
-        $nim      = $this->input->post('nim');
-        $password = $this->input->post('password');
+        $data['pinjam'] = $this->db->query("SELECT * FROM tb_transaksi,tb_anggota,tb_buku WHERE nim_anggota=nim AND kode_buku=kode AND tgl_dikembalikan IS NULL AND nim_anggota=".$nim)->result();       
+        $data['melebihi'] = $this->db->query("SELECT * FROM tb_transaksi,tb_anggota,tb_buku WHERE nim_anggota=nim AND kode_buku=kode AND tgl_kembali < '$date' AND tgl_dikembalikan AND NULL AND nim_anggota=".$nim)->result();
+        $data['kembali'] = $this->db->query("SELECT * FROM tb_transaksi,tb_anggota,tb_buku WHERE nim_anggota=nim AND kode_buku=kode AND tgl_dikembalikan IS NOT NULL AND nim_anggota=".$nim)->result();
 
-        $this->form_validation->set_rules('nim','Nim','trim|required');
-        $this->form_validation->set_rules('password','Password','trim|required');
+        $data['j_pinjam'] = $this->db->query("SELECT * FROM tb_transaksi,tb_anggota,tb_buku WHERE nim_anggota=nim AND kode_buku=kode AND tgl_dikembalikan IS NULL AND nim_anggota=".$nim)->num_rows();       
+        $data['j_melebihi'] = $this->db->query("SELECT * FROM tb_transaksi,tb_anggota,tb_buku WHERE nim_anggota=nim AND kode_buku=kode AND tgl_kembali < '$date' AND tgl_dikembalikan AND NULL AND nim_anggota=".$nim)->num_rows();
+        $data['j_kembali'] = $this->db->query("SELECT * FROM tb_transaksi,tb_anggota,tb_buku WHERE nim_anggota=nim AND kode_buku=kode AND tgl_dikembalikan IS NOT NULL AND nim_anggota=".$nim)->num_rows();
 
-        if($this->form_validation->run() != false){
-            $where = array(
-                'nim' => $nim,
-                'password' => md5($password)
-            );
-
-            $data = $this->m_master->edit_data($where,'tb_anggota')->num_rows();
-            $d    = $this->m_master->edit_data($where,'tb_anggota')->row();
-
-            if($data>0){
-                $session = array (
-                    'nim'     => $d->nim,
-                    'nama'   => $d->nama,
-                    'status' => 'login'
-                );
-                $this->session->set_userdata($session);
-                redirect('user');
-            }
-            else{
-                redirect('user?pesan=gagal'.md5($password));
-            }
-        }
-        else{
-            $this->load->view('user/v_login');
-        }
-    }
-
-    public function userview(){
-        $this->load->view('user/v_pinjam');
+        $this->load->view('user/v_user',$data);
     }
 }

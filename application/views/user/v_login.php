@@ -52,7 +52,7 @@
                             }
                         } ?>
                         
-                        <form class="user" method="post" action="<?php echo base_url()?>user/login">
+                        <form class="user" method="post" action="<?php echo base_url()?>auth_user/login">
                             <div class="form-group">
                                 <input type="text" class="form-control form-control-user" name="nim" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Input NIM">
                                 <?php echo form_error('nim')?>
