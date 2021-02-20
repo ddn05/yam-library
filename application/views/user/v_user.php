@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>YAM LIBRARY - LOGIN</title>
+    <title>YAM LIBRARY - USER</title>
 
     <!-- Custom fonts for this template-->
     <link href="<?php echo base_url();?>assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -42,8 +42,8 @@
                         
                         <?php
                         if(isset($_GET['pesan'])){
-                            if($_GET['pesan'] == "gagal"){
-                                echo "<div class='alert alert-danger'>Login Gagal !</div>";
+                            if($_GET['pesan'] == "berhasilubah"){
+                                echo "<div class='alert alert-success'>Berhasil mengubah Password</div>";
                             }
                             if($_GET['pesan'] == "logout"){
                                 echo "<div class='alert alert-warning'>Anda telah Logout</div>";
@@ -113,7 +113,7 @@
                     <br>
                     <br>
                     <section class="text-center">
-                        <a href="" class="text-center">Ganti Password</a><br><hr>
+                        <a href="<?php echo base_url()?>user/password" class="text-center">Ganti Password</a><br><hr>
                         <a href="<?php echo base_url()?>auth_user/logout" class="text-center">Logout</a>
                     </section>
                     </div>

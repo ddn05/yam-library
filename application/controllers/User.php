@@ -23,4 +23,38 @@ class User extends CI_Controller {
 
         $this->load->view('user/v_user',$data);
     }
+
+    public function password(){
+        $this->load->view('user/v_password');
+    }
+
+    public function act_password(){
+        $key1 = $this->input->post('key1');
+        $key2 = $this->input->post('key2');
+
+        $this->form_validation->set_rules('key1','Key1', 'required|matches[ulangpass]');
+        $this->form_validation->set_rules('key2','Key2 Password Baru','required');
+
+        if($key1 == '' && $key2 == ''){
+            redirect('user/password?pesan=ulang');
+        }
+
+        else if($key1 == $key2){
+            $nim = array(
+                'nim' => $this->session->userdata('nim')
+            );
+
+            $password = array(
+                'password' => md5($key1)
+            );
+
+            $this->m_master->update_data($nim,$password,'tb_anggota');
+            redirect('user?pesan=berhasilubah');
+            
+        }
+
+        else{
+            redirect('user/password?pesan=ulang');
+        }
+    }
 }
