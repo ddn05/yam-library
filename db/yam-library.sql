@@ -45,7 +45,7 @@ insert  into `tb_anggota`(`nim`,`nama`,`jk`,`hp`,`email`,`alamat`,`password`) va
 (4022011,'Enung lestari','Perempuan','082116937466','Enung1052@gmail.com','Kp. Batuwulung, rt 001 rwa 002, kelas/des kubangsari, kec. Cikalong. ','a036f1976efc109c6e86cd0e56cfce89'),
 (4022012,'Ernanda','Laki-Laki','083151871319','rnanda.media@gmail.com','Jln raya desa sekuduk rt 01/rw 01 kec.sejangkung kab.sambas','a036f1976efc109c6e86cd0e56cfce89'),
 (4022013,'Evi Nuraulia','Perempuan','085320601644','Evi.nuraulia46@gmail.com','Jl raya cikalong Kp. Cikalong RT/RW 001/005 Ds. Cikalong Kec. Cikalong  Kab. Tasikmalaya','a036f1976efc109c6e86cd0e56cfce89'),
-(4022014,'Muhammad Aria Wiarata','Laki-Laki','08997598743','ariaqolbu@gmail.com','Jl. Babakan tipar cicantayan sukabumi.','a036f1976efc109c6e86cd0e56cfce89'),
+(4022014,'Muhammad Aria Wiarata','Laki-Laki','08997598743','ariaqolbu@gmail.com','Jl. Babakan tipar cicantayan sukabumi.\r\n','63a9f0ea7bb98050796b649e85481845'),
 (4022015,'Nadiyatin Nafi\'ah','Perempuan','087739705578','nadiyatinn14@gmail.com','Kp. Citaman Rt003/Rw018 Kel. Cigugur Tengah Kota Cimahi','a036f1976efc109c6e86cd0e56cfce89'),
 (4022016,'Pera nurya lestari','Perempuan','081281126488','veraaha14@gmail.com','Jln.cibeber RT/RW 10/03\r\nDesa Cibeber kec.cikalong kab.tasikmalaya','a036f1976efc109c6e86cd0e56cfce89'),
 (4022017,'Riswan','Laki-Laki','081548292846','hermawanriswan32@gmail.com','Kp. Nanggerang Ds. Cikadu Kec. Cikalong Kab. Tasikmalaya','a036f1976efc109c6e86cd0e56cfce89'),
@@ -76,7 +76,7 @@ CREATE TABLE `tb_buku` (
 
 insert  into `tb_buku`(`kode`,`judul`,`penulis`,`tahun`,`halaman`,`penerbit`,`kategori`,`stok`,`sumber`,`kondisi`) values 
 (1002,'Mengelola Hidup dan Merencanakan Masa Depan','Marwah Dawud Ibrohim',2003,225,'MHMMD Production','Motivasi',1,'Yayasan','Lama'),
-(1003,'Menginstal Optimisme','Martin E.P. Seligman, Ph.D',2008,396,'PT KARYA KITA','Motivasi',0,'Yayasan','Lama'),
+(1003,'Menginstal Optimisme','Martin E.P. Seligman, Ph.D',2008,396,'PT KARYA KITA','Motivasi',1,'Yayasan','Lama'),
 (1004,'Intentional living','John c.maxwell',2016,352,'Pt menuju insan ceme','Motivasi',1,'Yayasan','Lama'),
 (1005,'Indahnya Berpikir positif','Sulaiman Al- Kumayi, MA.',2003,150,'Atmaja','Motivasi',1,'Yayasan','Lama'),
 (1006,'Selamat datang krisis','Laura day',2006,331,'Hikmah','Motivasi',1,'Yayasan','Lama'),
@@ -581,13 +581,13 @@ CREATE TABLE `tb_petugas` (
   `username` varchar(30) NOT NULL,
   `password` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`,`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `tb_petugas` */
 
 insert  into `tb_petugas`(`id`,`nama`,`username`,`password`) values 
-(2,'Dadan','admin','0192023a7bbd73250516f069df18b500'),
-(3,'Dadan Alhamdulillah Sae','1177050026','63a9f0ea7bb98050796b649e85481845');
+(2,'Dadan','admin','d41d8cd98f00b204e9800998ecf8427e'),
+(4,'Muhamad Aria Wirata - Divisi P','ariawirata','63a9f0ea7bb98050796b649e85481845');
 
 /*Table structure for table `tb_transaksi` */
 
@@ -611,13 +611,9 @@ CREATE TABLE `tb_transaksi` (
   CONSTRAINT `tb_transaksi_ibfk_2` FOREIGN KEY (`nim_anggota`) REFERENCES `tb_anggota` (`nim`),
   CONSTRAINT `tb_transaksi_ibfk_3` FOREIGN KEY (`kode_buku`) REFERENCES `tb_buku` (`kode`),
   CONSTRAINT `tb_transaksi_ibfk_4` FOREIGN KEY (`id_petugas`) REFERENCES `tb_petugas` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `tb_transaksi` */
-
-insert  into `tb_transaksi`(`id_transaksi`,`id_petugas`,`nim_anggota`,`kode_buku`,`tgl_pinjam`,`tgl_kembali`,`denda`,`total_denda`,`status`,`tgl_dikembalikan`) values 
-(30,2,4011903,1002,'2021-02-19','2021-02-26',500,NULL,'Dikembalikan','2021-02-19'),
-(31,2,4011903,1003,'2021-02-19','2021-02-26',500,NULL,'Belum Dikembalikan',NULL);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

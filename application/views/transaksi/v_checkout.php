@@ -69,7 +69,7 @@
                                 <div class="row">
                                     <div class="form-group col-md-4">
                                         <label>Denda</label>
-                                        <input type="number" class="form-control mb-2" id="denda" placeholder="" name="denda" value="500">
+                                        <input type="number" class="form-control mb-2" id="denda" placeholder="" name="denda" value="1000">
                                     </div>
                                 </div>
                                 <a href="<?php echo base_url('admin/peminjaman')?>" class="btn btn-danger">Batal</a>
