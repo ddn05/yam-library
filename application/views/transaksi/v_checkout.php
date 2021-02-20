@@ -74,7 +74,7 @@
                                 </div>
                                 <a href="<?php echo base_url('admin/peminjaman')?>" class="btn btn-danger">Batal</a>
                                 <button type="submit" class="btn btn-primary">Simpan</button>
-                            </form> 
+                            </form>
                         </div>
                     
 

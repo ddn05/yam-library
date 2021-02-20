@@ -770,12 +770,21 @@ class Admin extends CI_Controller {
                 $this->form_validation->set_rules('key_anggota','Key_anggota','trim|required');
                 $this->form_validation->set_rules('key_buku','Key_buku','trim|required');
                 
+                $query = $this->db->select('stok')->from('tb_buku')->where('kode', $key_buku)->get();
+                $cek   = $query->row()->stok;
+                
                 if($cek_anggota != false && $cek_buku != false){
-                        $this->load->view('template/header',$data);
-                        $this->load->view('template/sidebar');
-                        $this->load->view('transaksi/v_checkout',$data);
-                        $this->load->view('template/footer');
+                        if($cek == 0){
+                                redirect('admin/peminjaman?pesan=udah');
+                        }
+                        else{
+                                $this->load->view('template/header',$data);
+                                $this->load->view('template/sidebar');
+                                $this->load->view('transaksi/v_checkout',$data);
+                                $this->load->view('template/footer');
+                        }
                 }
+                
                 else{
                         redirect('admin/peminjaman?pesan=gagal');
                 }

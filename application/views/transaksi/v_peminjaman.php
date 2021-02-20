@@ -14,6 +14,9 @@
                                     if($_GET['pesan'] == "gagal"){
                                         echo "<div class='alert alert-danger'>Transaksi Gagal</div>";
                                     }
+                                    if($_GET['pesan'] == "udah"){
+                                        echo "<div class='alert alert-danger'>Stok buku kosong</div>";
+                                    }
                                 }
                             ?>
 

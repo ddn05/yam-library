@@ -20,7 +20,7 @@
     <link href="<?php echo base_url();?>assets/css/sb-admin-2.min.css" rel="stylesheet">
 
     </head>
-
+    
     <body class="bg-gradient-primary">
 
     <div class="container">
@@ -55,7 +55,16 @@
                                 <input type="password" class="form-control form-control-user" name="key2" id="exampleInputPassword" placeholder="Konfirmasi Password baru">
                                 <?php echo form_error('key2')?>
                             </div>
-                        <button type="submit" class="btn btn-primary btn-user btn-block">Simpan</button>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <a href="<?php echo base_url('user')?>" class="btn m-1 btn-danger btn-user btn-block">Batal</a>
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="submit" class="btn m-1 btn-primary btn-user btn-block">Simpan</button>
+                                </div>
+                                
+                            </div>
+                        
                     </form>
 
                     </div>
