@@ -14,6 +14,7 @@
                             <tr><th>Penerbit</th><td>: <?php echo $buk->penerbit?></td></tr>
                             <tr><th>Kategori</th><td>: <?php echo $buk->kategori?></td></tr>
                             <tr><th>Stok</th><td>: <?php echo $buk->stok?></td></tr>
+                            <tr><th>Stok awal</th><td>: <?php echo $buk->stok_awal?></td></tr>
                             <tr><th>Sumber</th><td>: <?php echo $buk->sumber?></td></tr>
                             <tr><th>Kondisi</th><td>: <?php echo $buk->kondisi?></td></tr>
                         </table>

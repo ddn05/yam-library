@@ -32,6 +32,7 @@
             <th scope="col">Kategori</th>
             <th scope="col">Penerbit</th>
             <th scope="col">Stok</th>
+            <th scope="col">Stok Awal</th>
             </tr>
         </thead>
         <tbody>
@@ -48,6 +49,7 @@
                     <td><?php echo $buk->kategori ?></td>
                     <td><?php echo $buk->penerbit ?></td>
                     <td class="text-center"><?php echo $buk->stok ?></td>
+                    <td class="text-center"><?php echo $buk->stok_awal ?></td>
                 </tr>
             <?php } ?>
         </tbody>

@@ -150,9 +150,9 @@
                             <?php echo form_error('penerbit')?>
                         </div>
                         <div class="form-group col-md-3">
-                            <label>Stok</label>
-                            <input type="number" class="form-control" id="stok" placeholder="" name="stok">
-                            <?php echo form_error('stok')?>
+                            <label>Stok awal</label>
+                            <input type="number" class="form-control" id="stok_awal" placeholder="" name="stok_awal">
+                            <?php echo form_error('stok_awal')?>
                         </div>
                     </div>
                     <div class="form-row">

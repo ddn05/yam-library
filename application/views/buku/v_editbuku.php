@@ -58,8 +58,8 @@
                             <?php echo form_error('penerbit')?>
                         </div>
                         <div class="form-group col-md-3">
-                            <label>Stok</label>
-                            <input type="number" class="form-control" id="stok" placeholder="" name="stok" value="<?php echo $buk->stok?>">
+                            <label>Stok awal</label>
+                            <input type="number" class="form-control" id="stok" placeholder="" name="stok_awal" value="<?php echo $buk->stok_awal?>">
                             <?php echo form_error('stok')?>
                         </div>
                     </div>

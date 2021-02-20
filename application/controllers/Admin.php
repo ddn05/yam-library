@@ -605,7 +605,7 @@ class Admin extends CI_Controller {
                 $halaman        = $this->input->post('halaman');
                 $kategori       = $this->input->post('kategori');
                 $penerbit       = $this->input->post('penerbit');
-                $stok           = $this->input->post('stok');
+                $stok_awal      = $this->input->post('stok_awal');
                 $sumber         = $this->input->post('sumber');
                 $kondisi        = $this->input->post('kondisi');
 
@@ -617,7 +617,8 @@ class Admin extends CI_Controller {
                         'halaman'       => $halaman,
                         'kategori'      => $kategori,
                         'penerbit'      => $penerbit,
-                        'stok'          => $stok,
+                        'stok'          => $stok_awal,
+                        'stok_awal'     => $stok_awal,
                         'sumber'        => $sumber,
                         'kondisi'       => $kondisi
                 );
@@ -629,7 +630,7 @@ class Admin extends CI_Controller {
                 $this->form_validation->set_rules('halaman','Halaman','trim|required');
                 $this->form_validation->set_rules('kategori','Kategori','trim|required');
                 $this->form_validation->set_rules('penerbit','Penerbit','trim|required');
-                $this->form_validation->set_rules('stok','Stok','trim|required');
+                $this->form_validation->set_rules('stok_awal','Stok_awal','trim|required');
                 $this->form_validation->set_rules('sumber','Sumber','trim|required');
                 $this->form_validation->set_rules('kondisi','Kondisi','trim|required');
 
@@ -674,9 +675,12 @@ class Admin extends CI_Controller {
                 $halaman        = $this->input->post('halaman');
                 $kategori       = $this->input->post('kategori');
                 $penerbit       = $this->input->post('penerbit');
-                $stok           = $this->input->post('stok');
+                $stok_awal      = $this->input->post('stok_awal');
                 $sumber         = $this->input->post('sumber');
                 $kondisi        = $this->input->post('kondisi');
+
+                $pinjam  = $this->db->query("SELECT * FROM tb_transaksi,tb_anggota,tb_buku WHERE nim_anggota=nim AND kode_buku=kode AND tgl_dikembalikan IS NULL AND kode_buku=".$kode)->num_rows();
+                $jumstok = $stok_awal - $pinjam;
 
                 $data = array(
                         'judul'         => $judul,
@@ -685,7 +689,8 @@ class Admin extends CI_Controller {
                         'halaman'       => $halaman,
                         'kategori'      => $kategori,
                         'penerbit'      => $penerbit,
-                        'stok'          => $stok,
+                        'stok'          => $jumstok,
+                        'stok_awal'     => $stok_awal,
                         'sumber'        => $sumber,
                         'kondisi'       => $kondisi
                 );
@@ -701,7 +706,7 @@ class Admin extends CI_Controller {
                 $this->form_validation->set_rules('halaman','Halaman','trim|required');
                 $this->form_validation->set_rules('kategori','Kategori','trim|required');
                 $this->form_validation->set_rules('penerbit','Penerbit','trim|required');
-                $this->form_validation->set_rules('stok','Stok','trim|required');
+                $this->form_validation->set_rules('stok_awal','Stok_Awal','trim|required');
                 $this->form_validation->set_rules('sumber','Sumber','trim|required');
                 $this->form_validation->set_rules('kondisi','Kondisi','trim|required');
 
