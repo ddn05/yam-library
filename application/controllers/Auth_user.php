@@ -27,7 +27,7 @@ class Auth_user extends CI_Controller {
                 $session = array (
                     'nim'     => $d->nim,
                     'nama'   => $d->nama,
-                    'status' => 'login'
+                    'status' => 'masuk'
                 );
                 $this->session->set_userdata($session);
                 redirect('user');

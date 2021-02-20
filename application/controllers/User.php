@@ -5,7 +5,7 @@ class User extends CI_Controller {
     function __construct(){
 		parent::__construct();
 		// cek login
-		if($this->session->userdata('status') != "login"){
+		if($this->session->userdata('status') != "masuk"){
                         redirect('auth_user?pesan=belumlogin');
 		}
 	}
